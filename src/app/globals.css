@@ -5,126 +5,97 @@
 :root {
   --color-twilight-base: #050D18;
   --color-twilight-card: #0A192F;
-  --color-twilight-surface: #102540;
-  --color-twilight-border: #1B385E;
-  --color-gold: #F59E0B;
-  --color-gold-glow: #FBBF24;
-  --color-emerald: #10B981;
+  --color-blue-primary: #2563EB;
+  --color-emerald-primary: #10B981;
 }
 
 body {
-  background-color: #050D18;
-  color: #F1F5F9;
+  background-color: #F8FAFC;
+  color: #0F172A;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   overflow-x: hidden;
   min-height: 100vh;
-  background-image: 
-    radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.08) 0%, transparent 60%),
-    radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 90% 40%, rgba(14, 116, 144, 0.05) 0%, transparent 50%),
-    linear-gradient(180deg, #071526 0%, #050D18 100%);
-  background-attachment: fixed;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #050D18;
+  background: #F1F5F9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1B385E;
+  background: #CBD5E1;
   border-radius: 9999px;
-  border: 2px solid #050D18;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #F59E0B;
+  background: #94A3B8;
 }
 
-/* Glassmorphism Cards */
-.glass-card {
-  background: rgba(12, 30, 52, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(30, 59, 96, 0.6);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+/* Hide scrollbar for clean carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-.glass-card-hover {
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+/* Device Mockup Shell */
+.phone-frame {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  height: 780px;
+  background: #FFFFFF;
+  border-radius: 46px;
+  border: 11px solid #111827;
+  box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.glass-card-hover:hover {
-  transform: translateY(-3px);
-  background: rgba(18, 41, 68, 0.85);
-  border-color: rgba(245, 158, 11, 0.4);
-  box-shadow: 0 12px 35px -5px rgba(245, 158, 11, 0.15), 0 0 20px rgba(16, 185, 129, 0.1);
+.phone-punchhole {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: #000000;
+  border-radius: 9999px;
+  z-index: 50;
 }
 
-/* Gold Text Gradient */
-.text-gold-gradient {
-  background: linear-gradient(135deg, #FFFBEB 0%, #FDE047 30%, #F59E0B 70%, #D97706 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.phone-screen {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Emerald Text Gradient */
-.text-emerald-gradient {
-  background: linear-gradient(135deg, #A7F3D0 0%, #34D399 50%, #10B981 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Twilight Gold Button */
-.btn-gold {
-  background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #D97706 100%);
-  color: #050D18;
-  font-weight: 700;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 14px 0 rgba(245, 158, 11, 0.39);
-}
-
-.btn-gold:hover {
-  background: linear-gradient(135deg, #FEF08A 0%, #FBBF24 50%, #B45309 100%);
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.55);
-  transform: translateY(-1px);
-}
-
-/* Emerald Glow Button */
-.btn-emerald {
-  background: linear-gradient(135deg, #34D399 0%, #10B981 50%, #059669 100%);
+/* Blue Install Button matching screenshot */
+.btn-install {
+  background-color: #2563EB;
   color: #FFFFFF;
   font-weight: 700;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.35);
+  border-radius: 9999px;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
 }
 
-.btn-emerald:hover {
-  background: linear-gradient(135deg, #6EE7B7 0%, #34D399 50%, #047857 100%);
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
-  transform: translateY(-1px);
+.btn-install:hover {
+  background-color: #1D4ED8;
+  transform: scale(1.02);
 }
 
-/* Pill badge like logo */
-.nur-logo-pill {
-  background: #043229;
-  border: 1.5px solid #F59E0B;
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.35);
-}
-
-/* Shimmer animation */
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-.animate-shimmer {
-  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(245, 158, 11, 0.15) 50%, rgba(255,255,255,0) 100%);
-  background-size: 200% 100%;
-  animation: shimmer 2.5s infinite;
+.btn-install:active {
+  transform: scale(0.97);
 }
