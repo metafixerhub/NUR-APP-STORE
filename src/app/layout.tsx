@@ -21,7 +21,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
       </head>
-      <body className="bg-[#F8FAFC] text-slate-900 min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
+      <body className="bg-white text-slate-900 min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
         
         {/* Main Content Area */}
         <main className="flex-1">

@@ -40,7 +40,9 @@ export default function AppCard({ app, onDownloadStarted, layout = 'row' }: AppC
           });
         } catch (err) {}
 
-        const downloadUrl = app.apkUrl || `/sample-apks/${app.id}.apk`;
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+        const rawUrl = app.apkUrl || `/sample-apks/${app.id}.apk`;
+        const downloadUrl = rawUrl.startsWith('/') && !rawUrl.startsWith(basePath) ? `${basePath}${rawUrl}` : rawUrl;
         const link = document.createElement('a');
         link.href = downloadUrl;
         link.download = app.apkFileName || `${app.name.toLowerCase().replace(/\s+/g, '-')}.apk`;
@@ -62,11 +64,11 @@ export default function AppCard({ app, onDownloadStarted, layout = 'row' }: AppC
     return (
       <NextLink
         href={`/app/${app.id}`}
-        className="group flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-white/5 dark:bg-nur-navy/70 hover:bg-white/10 dark:hover:bg-nur-surface border border-slate-200/60 dark:border-nur-border/70 hover:border-blue-500/50 transition-all duration-200 shadow-sm"
+        className="group flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-blue-400 transition-all duration-200 shadow-xs"
       >
         <div className="flex items-center gap-3.5 min-w-0">
           {/* App Icon */}
-          <div className="relative w-14 h-14 rounded-2xl overflow-hidden shrink-0 bg-slate-900 border border-slate-200/50 dark:border-nur-border shadow-md">
+          <div className="relative w-14 h-14 rounded-2xl overflow-hidden shrink-0 bg-slate-50 border border-slate-200 shadow-xs">
             <Image
               src={app.iconUrl || '/logo.png'}
               alt={app.name}
@@ -78,18 +80,18 @@ export default function AppCard({ app, onDownloadStarted, layout = 'row' }: AppC
 
           {/* Title & Subtitle */}
           <div className="min-w-0 flex-1">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white leading-tight truncate group-hover:text-blue-500 transition-colors">
+            <h3 className="text-sm font-bold text-slate-900 leading-tight truncate group-hover:text-blue-600 transition-colors">
               {app.name}
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 truncate mt-0.5 font-medium">
+            <p className="text-xs text-slate-500 truncate mt-0.5 font-medium">
               {app.shortDescription}
             </p>
-            <div className="flex items-center gap-2 mt-1 text-[11px] font-semibold text-slate-600 dark:text-slate-300">
+            <div className="flex items-center gap-2 mt-1 text-[11px] font-semibold text-slate-600">
               <span className="flex items-center gap-0.5 text-amber-500">
                 <Star className="w-3 h-3 fill-amber-400 text-amber-400 inline" />
                 {app.rating ? app.rating.toFixed(1) : '4.8'}
               </span>
-              <span className="text-slate-400">•</span>
+              <span className="text-slate-300">•</span>
               <span className="text-slate-500 text-[10px]">{app.size}</span>
             </div>
           </div>
@@ -129,20 +131,20 @@ export default function AppCard({ app, onDownloadStarted, layout = 'row' }: AppC
 
   // GRID LAYOUT
   return (
-    <div className="group relative rounded-2xl bg-white/5 dark:bg-nur-navy/70 hover:bg-white/10 dark:hover:bg-nur-surface border border-slate-200/60 dark:border-nur-border/70 hover:border-blue-500/50 p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col justify-between">
+    <div className="group relative rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-blue-400 p-4 transition-all duration-200 shadow-xs flex flex-col justify-between">
       <NextLink href={`/app/${app.id}`} className="block flex-1">
         <div className="flex items-start gap-3.5 mb-3">
-          <div className="relative w-14 h-14 rounded-2xl overflow-hidden shrink-0 bg-slate-900 border border-nur-border shadow-md">
+          <div className="relative w-14 h-14 rounded-2xl overflow-hidden shrink-0 bg-slate-50 border border-slate-200 shadow-xs">
             <Image src={app.iconUrl || '/logo.png'} alt={app.name} fill sizes="56px" className="object-cover" />
           </div>
 
           <div className="min-w-0 flex-1">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-500 transition-colors truncate leading-snug">
+            <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors truncate leading-snug">
               {app.name}
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 truncate mb-1">{app.developer}</p>
-            <div className="flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-300">
-              <span className="flex items-center gap-1 font-semibold text-amber-400">
+            <p className="text-xs text-slate-500 truncate mb-1">{app.developer}</p>
+            <div className="flex items-center gap-2 text-[11px] text-slate-600">
+              <span className="flex items-center gap-1 font-semibold text-amber-500">
                 <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
                 {app.rating ? app.rating.toFixed(1) : '4.8'}
               </span>
@@ -152,20 +154,20 @@ export default function AppCard({ app, onDownloadStarted, layout = 'row' }: AppC
           </div>
         </div>
 
-        <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed mb-4">
+        <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-4">
           {app.shortDescription}
         </p>
       </NextLink>
 
-      <div className="pt-2 border-t border-slate-200/60 dark:border-nur-border/40 flex items-center justify-between gap-2">
-        <span className="text-[10px] font-semibold text-emerald-500 px-2 py-0.5 rounded-full bg-emerald-500/10">
+      <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+        <span className="text-[10px] font-semibold text-blue-700 px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-200">
           {app.category}
         </span>
 
         <button
           onClick={handleQuickDownload}
           disabled={downloading}
-          className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all shadow-sm ${
+          className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all shadow-xs ${
             downloaded
               ? 'bg-emerald-600 text-white'
               : downloading

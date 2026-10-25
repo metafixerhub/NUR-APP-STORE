@@ -151,71 +151,68 @@ export default function AdminPortalPage() {
       <div className="min-h-[75vh] flex items-center justify-center px-4 py-12">
         <div className="relative w-full max-w-md">
           
-          {/* Ambient Glow */}
-          <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-nur-gold via-emerald-500 to-amber-600 opacity-20 blur-xl"></div>
-          
-          <div className="relative rounded-3xl bg-nur-navy/95 border border-nur-border/90 p-8 shadow-2xl backdrop-blur-xl">
+          <div className="relative rounded-3xl bg-white border border-slate-200 p-8 shadow-xl">
             
             {/* Header with logo */}
             <div className="text-center mb-8">
-              <div className="relative w-16 h-16 rounded-2xl overflow-hidden mx-auto mb-3 border border-nur-gold/40 shadow-lg">
+              <div className="relative w-16 h-16 rounded-2xl overflow-hidden mx-auto mb-3 border border-emerald-500/30 shadow-md">
                 <Image src="/logo.png" alt="Nur Logo" fill sizes="64px" className="object-contain" />
               </div>
-              <h1 className="text-2xl font-black text-white">Nur Admin Portal</h1>
-              <p className="text-xs text-slate-400 mt-1">
+              <h1 className="text-2xl font-black text-slate-900">Nur Admin Portal</h1>
+              <p className="text-xs text-slate-500 mt-1">
                 Authorized publishing & application management system
               </p>
             </div>
 
             {loginError && (
-              <div className="mb-6 p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-xs flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
+              <div className="mb-6 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0 text-red-500" />
                 <span>{loginError}</span>
               </div>
             )}
 
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                   Admin Username
                 </label>
                 <div className="relative">
-                  <ShieldCheck className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-nur-gold" />
+                  <ShieldCheck className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600" />
                   <input
                     type="text"
                     required
                     value={usernameInput}
                     onChange={(e) => setUsernameInput(e.target.value)}
                     placeholder="Enter admin username"
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-nur-dark border border-nur-border text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-nur-gold"
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                   Admin Password
                 </label>
                 <div className="relative">
-                  <Key className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-400" />
+                  <Key className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-600" />
                   <input
                     type="password"
                     required
                     value={passwordInput}
                     onChange={(e) => setPasswordInput(e.target.value)}
                     placeholder="Enter admin password"
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-nur-dark border border-nur-border text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-nur-gold"
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500"
                   />
                 </div>
               </div>
 
-              <div className="p-3 rounded-xl bg-nur-dark/60 border border-nur-border/60 text-[11px] text-slate-400 leading-normal">
-                <strong className="text-nur-gold">Default Credentials:</strong> Username: <code className="text-white bg-nur-surface px-1.5 py-0.5 rounded">admin</code> | Password: <code className="text-white bg-nur-surface px-1.5 py-0.5 rounded">admin</code>
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-[11px] text-slate-600 leading-normal">
+                <strong className="text-blue-600">Default Credentials:</strong> Username: <code className="text-slate-900 bg-slate-200 px-1.5 py-0.5 rounded font-mono font-bold">admin</code> | Password: <code className="text-slate-900 bg-slate-200 px-1.5 py-0.5 rounded font-mono font-bold">admin</code>
               </div>
 
               <button
                 type="submit"
-                className="w-full btn-gold py-3 rounded-xl text-xs font-bold transition-all shadow-lg flex items-center justify-center gap-2 mt-2"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-xs transition-all shadow-md flex items-center justify-center gap-2 mt-2"
               >
                 <Lock className="w-4 h-4" />
                 <span>Enter Admin Portal</span>
@@ -223,7 +220,7 @@ export default function AdminPortalPage() {
             </form>
 
             <div className="mt-6 text-center">
-              <NextLink href="/" className="text-xs text-slate-400 hover:text-nur-gold transition-colors">
+              <NextLink href="/" className="text-xs text-slate-500 hover:text-blue-600 font-semibold transition-colors">
                 ← Return to Public Store
               </NextLink>
             </div>
@@ -247,19 +244,19 @@ export default function AdminPortalPage() {
       )}
 
       {/* Admin Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-3xl bg-nur-navy/90 border border-nur-border mb-8 shadow-xl">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-3xl bg-white border border-slate-200 mb-8 shadow-xs">
         <div className="flex items-center gap-4">
-          <div className="relative w-14 h-14 rounded-2xl overflow-hidden border border-nur-gold/40 shrink-0">
+          <div className="relative w-14 h-14 rounded-2xl overflow-hidden border border-emerald-500/30 shrink-0 shadow-xs">
             <Image src="/logo.png" alt="Nur Logo" fill sizes="56px" className="object-contain" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-xl sm:text-2xl font-black text-white">Nur Admin Portal</h1>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-bold uppercase">
+              <h1 className="text-xl sm:text-2xl font-black text-slate-900">Nur Admin Portal</h1>
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold uppercase">
                 Active Admin
               </span>
             </div>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-500 mt-0.5">
               Publish APKs, update existing apps, and manage community feedback
             </p>
           </div>
@@ -269,15 +266,15 @@ export default function AdminPortalPage() {
           <NextLink
             href="/"
             target="_blank"
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-nur-surface hover:bg-nur-hover text-xs font-semibold text-slate-200 border border-nur-border transition-colors"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-semibold text-slate-700 border border-slate-200 transition-colors"
           >
-            <ExternalLink className="w-3.5 h-3.5 text-nur-gold" />
+            <ExternalLink className="w-3.5 h-3.5 text-blue-600" />
             <span>Open Store</span>
           </NextLink>
 
           <button
             onClick={handleLogout}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-xs font-semibold text-red-400 border border-red-500/20 transition-colors"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-red-50 hover:bg-red-100 text-xs font-semibold text-red-600 border border-red-200 transition-colors"
           >
             <LogOut className="w-3.5 h-3.5" />
             <span>Log Out</span>
@@ -287,44 +284,44 @@ export default function AdminPortalPage() {
 
       {/* Analytics Summary Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <div className="p-5 rounded-2xl bg-nur-navy/70 border border-nur-border">
-          <span className="text-xs font-semibold text-slate-400 flex items-center gap-1.5 mb-1">
-            <Layers className="w-4 h-4 text-nur-gold" />
+        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs">
+          <span className="text-xs font-semibold text-slate-500 flex items-center gap-1.5 mb-1">
+            <Layers className="w-4 h-4 text-blue-600" />
             Published Apps
           </span>
-          <p className="text-2xl font-black text-white">{apps.length}</p>
+          <p className="text-2xl font-black text-slate-900">{apps.length}</p>
         </div>
 
-        <div className="p-5 rounded-2xl bg-nur-navy/70 border border-nur-border">
-          <span className="text-xs font-semibold text-slate-400 flex items-center gap-1.5 mb-1">
-            <Download className="w-4 h-4 text-emerald-400" />
+        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs">
+          <span className="text-xs font-semibold text-slate-500 flex items-center gap-1.5 mb-1">
+            <Download className="w-4 h-4 text-emerald-600" />
             Total Downloads
           </span>
-          <p className="text-2xl font-black text-white">{totalDownloads.toLocaleString()}</p>
+          <p className="text-2xl font-black text-slate-900">{totalDownloads.toLocaleString()}</p>
         </div>
 
-        <div className="p-5 rounded-2xl bg-nur-navy/70 border border-nur-border">
-          <span className="text-xs font-semibold text-slate-400 flex items-center gap-1.5 mb-1">
-            <MessageSquare className="w-4 h-4 text-blue-400" />
+        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs">
+          <span className="text-xs font-semibold text-slate-500 flex items-center gap-1.5 mb-1">
+            <MessageSquare className="w-4 h-4 text-indigo-600" />
             Community Reviews
           </span>
-          <p className="text-2xl font-black text-white">{totalComments}</p>
+          <p className="text-2xl font-black text-slate-900">{totalComments}</p>
         </div>
 
-        <div className="p-5 rounded-2xl bg-nur-navy/70 border border-nur-border">
-          <span className="text-xs font-semibold text-slate-400 flex items-center gap-1.5 mb-1">
-            <ShieldCheck className="w-4 h-4 text-purple-400" />
+        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs">
+          <span className="text-xs font-semibold text-slate-500 flex items-center gap-1.5 mb-1">
+            <ShieldCheck className="w-4 h-4 text-purple-600" />
             Store Status
           </span>
-          <p className="text-2xl font-black text-emerald-400 flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <p className="text-2xl font-black text-emerald-600 flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
             Online
           </p>
         </div>
       </div>
 
       {/* Tabs Selector */}
-      <div className="flex border-b border-nur-border mb-8 overflow-x-auto no-scrollbar gap-2">
+      <div className="flex border-b border-slate-200 mb-8 overflow-x-auto no-scrollbar gap-2">
         <button
           onClick={() => {
             setActiveTab('publish');
@@ -332,8 +329,8 @@ export default function AdminPortalPage() {
           }}
           className={`flex items-center gap-2 px-5 py-3 border-b-2 text-xs font-bold whitespace-nowrap transition-all ${
             activeTab === 'publish' && !editingApp
-              ? 'border-nur-gold text-nur-gold bg-nur-gold/5'
-              : 'border-transparent text-slate-400 hover:text-white'
+              ? 'border-blue-600 text-blue-600 bg-blue-50/50'
+              : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
           <PlusCircle className="w-4 h-4" />
@@ -344,8 +341,8 @@ export default function AdminPortalPage() {
           onClick={() => setActiveTab('manage')}
           className={`flex items-center gap-2 px-5 py-3 border-b-2 text-xs font-bold whitespace-nowrap transition-all ${
             activeTab === 'manage' || editingApp
-              ? 'border-nur-gold text-nur-gold bg-nur-gold/5'
-              : 'border-transparent text-slate-400 hover:text-white'
+              ? 'border-blue-600 text-blue-600 bg-blue-50/50'
+              : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
           <Edit3 className="w-4 h-4" />
@@ -359,8 +356,8 @@ export default function AdminPortalPage() {
           }}
           className={`flex items-center gap-2 px-5 py-3 border-b-2 text-xs font-bold whitespace-nowrap transition-all ${
             activeTab === 'comments'
-              ? 'border-nur-gold text-nur-gold bg-nur-gold/5'
-              : 'border-transparent text-slate-400 hover:text-white'
+              ? 'border-blue-600 text-blue-600 bg-blue-50/50'
+              : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
           <MessageSquare className="w-4 h-4" />
@@ -370,13 +367,13 @@ export default function AdminPortalPage() {
 
       {/* TAB 1: PUBLISH / EDIT FORM */}
       {(activeTab === 'publish' || editingApp) && (
-        <div className="p-6 sm:p-8 rounded-3xl bg-nur-navy/80 border border-nur-border shadow-xl">
-          <div className="flex items-center justify-between mb-6 pb-4 border-b border-nur-border">
+        <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-xs">
+          <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-200">
             <div>
-              <h2 className="text-xl font-bold text-white flex items-center gap-2">
+              <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
                 <span>{editingApp ? `Edit App: ${editingApp.name}` : 'Publish New App to Nur App Store'}</span>
               </h2>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-slate-500 mt-1">
                 {editingApp
                   ? 'Update APK package, icon, descriptions, ratings or screenshots.'
                   : 'Follow the steps below to upload and publish your application.'}
@@ -386,7 +383,7 @@ export default function AdminPortalPage() {
             {editingApp && (
               <button
                 onClick={() => setEditingApp(null)}
-                className="px-4 py-2 rounded-xl bg-nur-surface hover:bg-nur-hover text-xs font-semibold text-slate-300"
+                className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-semibold text-slate-700 border border-slate-200"
               >
                 Cancel Edit
               </button>
@@ -421,7 +418,7 @@ export default function AdminPortalPage() {
                 value={searchManageQuery}
                 onChange={(e) => setSearchManageQuery(e.target.value)}
                 placeholder="Search apps to update or manage..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-nur-navy border border-nur-border text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-nur-gold"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 shadow-xs"
               />
             </div>
 
@@ -430,7 +427,7 @@ export default function AdminPortalPage() {
                 setEditingApp(null);
                 setActiveTab('publish');
               }}
-              className="w-full sm:w-auto btn-gold px-5 py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-md"
+              className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-all"
             >
               <PlusCircle className="w-4 h-4" />
               <span>Upload Another App</span>
@@ -438,10 +435,10 @@ export default function AdminPortalPage() {
           </div>
 
           {/* Apps Table / List */}
-          <div className="overflow-x-auto rounded-2xl border border-nur-border bg-nur-navy/60 shadow-xl">
+          <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-xs">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="border-b border-nur-border bg-nur-surface/60 text-slate-300 font-bold uppercase tracking-wider">
+                <tr className="border-b border-slate-200 bg-slate-50 text-slate-700 font-bold uppercase tracking-wider">
                   <th className="p-4">App</th>
                   <th className="p-4">Category</th>
                   <th className="p-4">Version</th>
@@ -450,7 +447,7 @@ export default function AdminPortalPage() {
                   <th className="p-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-nur-border/50 text-slate-300">
+              <tbody className="divide-y divide-slate-100 text-slate-800">
                 {filteredApps.length === 0 ? (
                   <tr>
                     <td colSpan={6} className="p-8 text-center text-slate-500 font-medium">
@@ -459,37 +456,37 @@ export default function AdminPortalPage() {
                   </tr>
                 ) : (
                   filteredApps.map((app) => (
-                    <tr key={app.id} className="hover:bg-nur-surface/40 transition-colors">
+                    <tr key={app.id} className="hover:bg-slate-50 transition-colors">
                       <td className="p-4">
                         <div className="flex items-center gap-3">
-                          <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-nur-border bg-nur-midnight">
+                          <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-slate-200 bg-slate-50">
                             <Image src={app.iconUrl || '/logo.png'} alt={app.name} fill sizes="48px" className="object-cover" />
                           </div>
                           <div className="min-w-0">
-                            <p className="font-bold text-white truncate max-w-xs">{app.name}</p>
-                            <p className="text-[11px] text-slate-400 truncate">{app.developer}</p>
+                            <p className="font-bold text-slate-900 truncate max-w-xs">{app.name}</p>
+                            <p className="text-[11px] text-slate-500 truncate">{app.developer}</p>
                           </div>
                         </div>
                       </td>
 
                       <td className="p-4">
-                        <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 whitespace-nowrap">
+                        <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-200 whitespace-nowrap">
                           {app.category}
                         </span>
                       </td>
 
-                      <td className="p-4 font-mono font-medium text-slate-300">
+                      <td className="p-4 font-mono font-medium text-slate-600">
                         v{app.version}
                       </td>
 
                       <td className="p-4">
-                        <div className="flex items-center gap-1 font-bold text-amber-400">
-                          <Star className="w-3.5 h-3.5 fill-amber-400" />
+                        <div className="flex items-center gap-1 font-bold text-amber-500">
+                          <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                           <span>{app.rating ? app.rating.toFixed(1) : '5.0'}</span>
                         </div>
                       </td>
 
-                      <td className="p-4 font-semibold text-slate-200">
+                      <td className="p-4 font-semibold text-slate-800">
                         {app.downloads || '0+'}
                       </td>
 
@@ -499,7 +496,7 @@ export default function AdminPortalPage() {
                           {/* Share Link button */}
                           <button
                             onClick={() => setShareModalApp(app)}
-                            className="px-3 py-1.5 rounded-lg bg-nur-gold/15 hover:bg-nur-gold text-nur-gold hover:text-nur-dark font-bold border border-nur-gold/40 transition-all flex items-center gap-1 shadow-sm"
+                            className="px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold border border-blue-200 transition-all flex items-center gap-1 shadow-xs"
                             title="Get special share link & QR code"
                           >
                             <Share2 className="w-3.5 h-3.5" />
@@ -512,7 +509,7 @@ export default function AdminPortalPage() {
                               setEditingApp(app);
                               window.scrollTo({ top: 0, behavior: 'smooth' });
                             }}
-                            className="px-3 py-1.5 rounded-lg bg-nur-surface hover:bg-nur-gold hover:text-nur-dark text-slate-200 font-semibold border border-nur-border transition-colors flex items-center gap-1"
+                            className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold border border-slate-200 transition-colors flex items-center gap-1"
                             title="Update this app"
                           >
                             <Edit3 className="w-3.5 h-3.5" />
@@ -523,7 +520,7 @@ export default function AdminPortalPage() {
                           <NextLink
                             href={`/app/${app.id}`}
                             target="_blank"
-                            className="p-1.5 rounded-lg bg-nur-surface hover:bg-nur-hover text-slate-300 border border-nur-border"
+                            className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200"
                             title="View in Store"
                           >
                             <ExternalLink className="w-3.5 h-3.5" />
@@ -532,7 +529,7 @@ export default function AdminPortalPage() {
                           {/* Delete */}
                           <button
                             onClick={() => handleDeleteApp(app.id, app.name)}
-                            className="p-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 transition-colors"
+                            className="p-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 transition-colors"
                             title="Delete app"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -554,8 +551,8 @@ export default function AdminPortalPage() {
       {activeTab === 'comments' && (
         <div className="space-y-4">
           <div className="flex items-center justify-between mb-2">
-            <h2 className="text-lg font-bold text-white">Community Reviews Moderation</h2>
-            <span className="text-xs text-slate-400">Total {totalComments} reviews across all apps</span>
+            <h2 className="text-lg font-bold text-slate-900">Community Reviews Moderation</h2>
+            <span className="text-xs text-slate-500">Total {totalComments} reviews across all apps</span>
           </div>
 
           <div className="space-y-3">
@@ -563,29 +560,29 @@ export default function AdminPortalPage() {
               (app.comments || []).map((comment) => (
                 <div
                   key={comment.id}
-                  className="p-4 rounded-2xl bg-nur-navy/70 border border-nur-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+                  className="p-4 rounded-2xl bg-white border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs"
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-white">{comment.userName}</span>
-                      <span className="text-slate-500">•</span>
-                      <span className="text-slate-400">{comment.date}</span>
-                      <span className="text-slate-500">•</span>
-                      <span className="text-nur-gold font-semibold">on {app.name}</span>
+                      <span className="font-bold text-slate-900">{comment.userName}</span>
+                      <span className="text-slate-400">•</span>
+                      <span className="text-slate-500">{comment.date}</span>
+                      <span className="text-slate-400">•</span>
+                      <span className="text-blue-600 font-semibold">on {app.name}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       {[1, 2, 3, 4, 5].map((s) => (
                         <Star
                           key={s}
-                          className={`w-3 h-3 ${s <= comment.rating ? 'fill-amber-400 text-amber-400' : 'text-slate-600'}`}
+                          className={`w-3 h-3 ${s <= comment.rating ? 'fill-amber-400 text-amber-400' : 'text-slate-300'}`}
                         />
                       ))}
                     </div>
-                    <p className="text-xs text-slate-300">{comment.comment}</p>
+                    <p className="text-xs text-slate-700">{comment.comment}</p>
                   </div>
 
                   <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
-                    <span className="text-[11px] text-slate-400">
+                    <span className="text-[11px] text-slate-500">
                       👍 {comment.likes || 0} helpful
                     </span>
                   </div>

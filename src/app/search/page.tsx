@@ -59,35 +59,35 @@ function SearchContent() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       
       <div className="flex items-center gap-3 mb-6">
-        <NextLink href="/" className="p-2 rounded-xl bg-nur-navy border border-nur-border text-slate-300 hover:text-white">
+        <NextLink href="/" className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700">
           <ArrowLeft className="w-4 h-4" />
         </NextLink>
-        <h1 className="text-2xl font-bold text-white">Search Nur App Store</h1>
+        <h1 className="text-2xl font-black text-slate-900">Search Nur App Store</h1>
       </div>
 
       {/* Main Search Input */}
       <div className="relative mb-6">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-nur-gold" />
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-blue-600" />
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search by app name, description, tags, or developer..."
-          className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-nur-navy border border-nur-border text-base text-slate-100 placeholder-slate-400 focus:outline-none focus:border-nur-gold shadow-lg"
+          className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-white border border-slate-200 text-base text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 shadow-xs"
           autoFocus
         />
       </div>
 
       {/* Filter Row */}
-      <div className="p-4 rounded-2xl bg-nur-surface/40 border border-nur-border mb-8 flex flex-wrap items-center justify-between gap-4 text-xs">
+      <div className="p-4 rounded-2xl bg-white border border-slate-200 mb-8 flex flex-wrap items-center justify-between gap-4 text-xs shadow-xs">
         
         {/* Category selector */}
         <div className="flex items-center gap-2">
-          <span className="font-semibold text-slate-400">Category:</span>
+          <span className="font-semibold text-slate-600">Category:</span>
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value as any)}
-            className="px-3 py-1.5 rounded-xl bg-nur-dark border border-nur-border text-slate-200 focus:outline-none focus:border-nur-gold"
+            className="px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:border-blue-500"
           >
             <option value="All">All Categories</option>
             <option value="Islamic & Quran">Islamic & Quran</option>
@@ -102,7 +102,7 @@ function SearchContent() {
 
         {/* Rating filter */}
         <div className="flex items-center gap-2">
-          <span className="font-semibold text-slate-400">Min Rating:</span>
+          <span className="font-semibold text-slate-600">Min Rating:</span>
           <div className="flex items-center gap-1">
             {[0, 4.0, 4.5, 4.8].map((val) => (
               <button
@@ -110,8 +110,8 @@ function SearchContent() {
                 onClick={() => setMinRating(val)}
                 className={`px-2.5 py-1 rounded-lg font-bold transition-colors ${
                   minRating === val
-                    ? 'bg-nur-gold text-nur-dark'
-                    : 'bg-nur-dark text-slate-300 hover:text-white border border-nur-border'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200'
                 }`}
               >
                 {val === 0 ? 'Any' : `${val}★+`}
@@ -120,18 +120,18 @@ function SearchContent() {
           </div>
         </div>
 
-        <div className="text-slate-400">
-          Found <strong className="text-white">{filteredApps.length}</strong> matching apps
+        <div className="text-slate-500">
+          Found <strong className="text-slate-900">{filteredApps.length}</strong> matching apps
         </div>
 
       </div>
 
       {/* Results Grid */}
       {filteredApps.length === 0 ? (
-        <div className="p-12 text-center rounded-3xl bg-nur-navy/40 border border-nur-border my-8">
-          <Search className="w-10 h-10 text-slate-500 mx-auto mb-3" />
-          <h3 className="text-base font-bold text-slate-200">No matching apps found</h3>
-          <p className="text-xs text-slate-400 mt-1">Try different keywords or reset your filters.</p>
+        <div className="p-12 text-center rounded-3xl bg-slate-50 border border-slate-200 my-8">
+          <Search className="w-10 h-10 text-slate-400 mx-auto mb-3" />
+          <h3 className="text-base font-bold text-slate-900">No matching apps found</h3>
+          <p className="text-xs text-slate-500 mt-1">Try different keywords or reset your filters.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

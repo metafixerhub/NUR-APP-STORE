@@ -97,8 +97,8 @@ export default function MyAppsPage() {
       
       {/* Header matching Screen 5: "My Apps" with three dots */}
       <div className="flex items-center justify-between mb-5">
-        <h1 className="text-2xl font-black text-white tracking-tight">My Apps</h1>
-        <button className="p-2 rounded-full hover:bg-nur-surface transition-colors text-slate-300">
+        <h1 className="text-2xl font-black text-slate-900 tracking-tight">My Apps</h1>
+        <button className="p-2 rounded-full hover:bg-slate-100 transition-colors text-slate-600">
           <MoreVertical className="w-5 h-5" />
         </button>
       </div>
@@ -109,8 +109,8 @@ export default function MyAppsPage() {
           onClick={() => setActiveTab('installed')}
           className={`px-4 py-2 rounded-full text-xs font-bold transition-all border ${
             activeTab === 'installed'
-              ? 'bg-blue-600 text-white border-blue-600 shadow-md'
-              : 'bg-nur-navy/80 text-slate-300 hover:text-white border-nur-border'
+              ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
+              : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border-slate-200'
           }`}
         >
           Installed
@@ -120,8 +120,8 @@ export default function MyAppsPage() {
           onClick={() => setActiveTab('updates')}
           className={`px-4 py-2 rounded-full text-xs font-bold transition-all border ${
             activeTab === 'updates'
-              ? 'bg-blue-600 text-white border-blue-600 shadow-md'
-              : 'bg-nur-navy/80 text-slate-300 hover:text-white border-nur-border'
+              ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
+              : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border-slate-200'
           }`}
         >
           Updates
@@ -131,8 +131,8 @@ export default function MyAppsPage() {
           onClick={() => setActiveTab('downloads')}
           className={`px-4 py-2 rounded-full text-xs font-bold transition-all border ${
             activeTab === 'downloads'
-              ? 'bg-blue-600 text-white border-blue-600 shadow-md'
-              : 'bg-nur-navy/80 text-slate-300 hover:text-white border-nur-border'
+              ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
+              : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border-slate-200'
           }`}
         >
           Downloads ({downloadingApps.length})
@@ -146,7 +146,7 @@ export default function MyAppsPage() {
           {/* Section: Downloading (2) */}
           <div>
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm font-bold text-slate-200">
+              <h2 className="text-sm font-bold text-slate-900">
                 Downloading ({downloadingApps.length})
               </h2>
               <span className="text-xs text-slate-400">›</span>
@@ -156,16 +156,16 @@ export default function MyAppsPage() {
               {downloadingApps.map((item) => (
                 <div
                   key={item.id}
-                  className="p-4 rounded-2xl bg-nur-navy/80 border border-nur-border shadow-md"
+                  className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs"
                 >
                   <div className="flex items-center justify-between gap-3 mb-2">
                     <div className="flex items-center gap-3">
-                      <div className="relative w-12 h-12 rounded-2xl overflow-hidden shrink-0 border border-nur-border bg-nur-midnight">
+                      <div className="relative w-12 h-12 rounded-2xl overflow-hidden shrink-0 border border-slate-200 bg-slate-50">
                         <Image src={item.iconUrl} alt={item.name} fill sizes="48px" className="object-cover" />
                       </div>
                       <div>
-                        <h3 className="text-sm font-bold text-white leading-tight">{item.name}</h3>
-                        <p className="text-xs text-slate-400 mt-0.5 font-medium">
+                        <h3 className="text-sm font-bold text-slate-900 leading-tight">{item.name}</h3>
+                        <p className="text-xs text-slate-500 mt-0.5 font-medium">
                           {item.downloadedMB} MB / {item.totalMB} MB
                         </p>
                       </div>
@@ -173,7 +173,7 @@ export default function MyAppsPage() {
 
                     <button
                       onClick={() => togglePause(item.id)}
-                      className="p-2 rounded-full bg-nur-surface hover:bg-nur-hover text-blue-400 border border-nur-border transition-colors"
+                      className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-blue-600 border border-slate-200 transition-colors"
                       title={item.isPaused ? 'Resume' : 'Pause'}
                     >
                       {item.isPaused ? <Play className="w-4 h-4 fill-current" /> : <Pause className="w-4 h-4 fill-current" />}
@@ -181,9 +181,9 @@ export default function MyAppsPage() {
                   </div>
 
                   {/* Progress bar */}
-                  <div className="w-full h-2 bg-nur-dark rounded-full overflow-hidden border border-nur-border/50">
+                  <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
                     <div
-                      className="h-full bg-blue-500 rounded-full transition-all duration-300"
+                      className="h-full bg-blue-600 rounded-full transition-all duration-300"
                       style={{ width: `${item.percent}%` }}
                     />
                   </div>
@@ -195,7 +195,7 @@ export default function MyAppsPage() {
           {/* Section: Completed (3) */}
           <div>
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm font-bold text-slate-200">
+              <h2 className="text-sm font-bold text-slate-900">
                 Completed ({completedApps.length})
               </h2>
               <span className="text-xs text-slate-400">›</span>
@@ -205,15 +205,15 @@ export default function MyAppsPage() {
               {completedApps.map((item) => (
                 <div
                   key={item.id}
-                  className="p-4 rounded-2xl bg-nur-navy/80 border border-nur-border flex items-center justify-between gap-3 shadow-md"
+                  className="p-4 rounded-2xl bg-white border border-slate-200 flex items-center justify-between gap-3 shadow-xs"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="relative w-12 h-12 rounded-2xl overflow-hidden shrink-0 border border-nur-border bg-nur-midnight">
+                    <div className="relative w-12 h-12 rounded-2xl overflow-hidden shrink-0 border border-slate-200 bg-slate-50">
                       <Image src={item.iconUrl} alt={item.name} fill sizes="48px" className="object-cover" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-white leading-tight">{item.name}</h3>
-                      <p className="text-xs text-emerald-400 mt-0.5 font-semibold flex items-center gap-1">
+                      <h3 className="text-sm font-bold text-slate-900 leading-tight">{item.name}</h3>
+                      <p className="text-xs text-emerald-600 mt-0.5 font-semibold flex items-center gap-1">
                         <CheckCircle2 className="w-3 h-3" />
                         <span>{item.status} ({item.size})</span>
                       </p>
@@ -222,7 +222,7 @@ export default function MyAppsPage() {
 
                   <button
                     onClick={() => handleOpenApp(item.name, `/sample-apks/${item.id}.apk`)}
-                    className="px-4 py-1.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-sm"
+                    className="px-4 py-1.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-xs"
                   >
                     Open
                   </button>
@@ -240,21 +240,21 @@ export default function MyAppsPage() {
           {completedApps.map((item) => (
             <div
               key={item.id}
-              className="p-4 rounded-2xl bg-nur-navy/80 border border-nur-border flex items-center justify-between gap-3"
+              className="p-4 rounded-2xl bg-white border border-slate-200 flex items-center justify-between gap-3 shadow-xs"
             >
               <div className="flex items-center gap-3">
-                <div className="relative w-12 h-12 rounded-2xl overflow-hidden shrink-0 border border-nur-border bg-nur-midnight">
+                <div className="relative w-12 h-12 rounded-2xl overflow-hidden shrink-0 border border-slate-200 bg-slate-50">
                   <Image src={item.iconUrl} alt={item.name} fill sizes="48px" className="object-cover" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-white leading-tight">{item.name}</h3>
-                  <p className="text-xs text-slate-400 mt-0.5">Version 1.0 • {item.size}</p>
+                  <h3 className="text-sm font-bold text-slate-900 leading-tight">{item.name}</h3>
+                  <p className="text-xs text-slate-500 mt-0.5">Version 1.0 • {item.size}</p>
                 </div>
               </div>
 
               <NextLink
                 href={`/app/${item.id}`}
-                className="px-4 py-1.5 rounded-full bg-nur-surface hover:bg-nur-hover border border-nur-border text-slate-200 text-xs font-semibold"
+                className="px-4 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-xs font-semibold"
               >
                 Details
               </NextLink>
@@ -265,10 +265,10 @@ export default function MyAppsPage() {
 
       {/* TAB 3: UPDATES */}
       {activeTab === 'updates' && (
-        <div className="p-8 text-center rounded-2xl bg-nur-navy/40 border border-nur-border">
-          <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto mb-3" />
-          <h3 className="text-base font-bold text-white mb-1">All Apps are Up to Date</h3>
-          <p className="text-xs text-slate-400">
+        <div className="p-8 text-center rounded-2xl bg-white border border-slate-200 shadow-xs">
+          <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto mb-3" />
+          <h3 className="text-base font-bold text-slate-900 mb-1">All Apps are Up to Date</h3>
+          <p className="text-xs text-slate-500">
             You are running the latest versions of all downloaded applications.
           </p>
         </div>

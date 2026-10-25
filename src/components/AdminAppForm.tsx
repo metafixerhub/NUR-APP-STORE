@@ -222,8 +222,8 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
       
       {/* Error or Alert banner */}
       {errorMessage && (
-        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-sm flex items-center gap-2">
-          <AlertCircle className="w-5 h-5 shrink-0 text-red-400" />
+        <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm flex items-center gap-2">
+          <AlertCircle className="w-5 h-5 shrink-0 text-red-500" />
           <span>{errorMessage}</span>
         </div>
       )}
@@ -232,17 +232,17 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         
         {/* 1. Upload APK File */}
-        <div className="p-5 rounded-2xl bg-nur-dark/80 border border-nur-border hover:border-nur-gold/40 transition-colors flex flex-col justify-between">
+        <div className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 transition-colors flex flex-col justify-between shadow-xs">
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-sm font-bold text-slate-100 flex items-center gap-2">
-                <UploadCloud className="w-4 h-4 text-nur-gold" />
+              <label className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <UploadCloud className="w-4 h-4 text-blue-600" />
                 <span>1. Upload APK File</span>
               </label>
-              <span className="text-[11px] text-slate-400">Android Package (.apk)</span>
+              <span className="text-[11px] text-slate-500">Android Package (.apk)</span>
             </div>
 
-            <p className="text-xs text-slate-400 mb-3">
+            <p className="text-xs text-slate-500 mb-3">
               Upload the Android APK installer file for direct download by users.
             </p>
 
@@ -256,20 +256,20 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
 
             <div
               onClick={() => apkInputRef.current?.click()}
-              className="border-2 border-dashed border-nur-border hover:border-nur-gold rounded-xl p-5 text-center cursor-pointer bg-nur-navy/40 hover:bg-nur-navy/80 transition-all flex flex-col items-center justify-center gap-2"
+              className="border-2 border-dashed border-slate-300 hover:border-blue-500 rounded-xl p-5 text-center cursor-pointer bg-slate-50 hover:bg-blue-50/50 transition-all flex flex-col items-center justify-center gap-2"
             >
               {apkFileName ? (
-                <div className="flex items-center gap-2 text-emerald-400">
+                <div className="flex items-center gap-2 text-emerald-600">
                   <FileCheck className="w-6 h-6" />
                   <div className="text-left">
-                    <p className="text-xs font-bold text-white max-w-[200px] truncate">{apkFileName}</p>
-                    <p className="text-[11px] text-emerald-400">Selected ({apkSize})</p>
+                    <p className="text-xs font-bold text-slate-900 max-w-[200px] truncate">{apkFileName}</p>
+                    <p className="text-[11px] text-emerald-600 font-semibold">Selected ({apkSize})</p>
                   </div>
                 </div>
               ) : (
                 <>
-                  <UploadCloud className="w-8 h-8 text-nur-gold animate-bounce" />
-                  <p className="text-xs font-semibold text-slate-200">
+                  <UploadCloud className="w-8 h-8 text-blue-600 animate-bounce" />
+                  <p className="text-xs font-semibold text-slate-800">
                     Click to select .apk file from your computer
                   </p>
                   <p className="text-[10px] text-slate-500">Supports direct APK file uploads</p>
@@ -279,7 +279,7 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
           </div>
 
           <div className="mt-3">
-            <label className="block text-[11px] font-medium text-slate-400 mb-1">
+            <label className="block text-[11px] font-medium text-slate-500 mb-1">
               Or specify external APK URL (optional):
             </label>
             <input
@@ -287,17 +287,17 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
               value={apkUrl}
               onChange={(e) => setApkUrl(e.target.value)}
               placeholder="https://example.com/downloads/my-app.apk"
-              className="w-full px-3 py-2 rounded-xl bg-nur-surface border border-nur-border text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-nur-gold"
+              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500"
             />
           </div>
         </div>
 
         {/* 2. Upload App Icon (Next to APK upload) */}
-        <div className="p-5 rounded-2xl bg-nur-dark/80 border border-nur-border hover:border-nur-gold/40 transition-colors flex flex-col justify-between">
+        <div className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-emerald-300 transition-colors flex flex-col justify-between shadow-xs">
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-sm font-bold text-slate-100 flex items-center gap-2">
-                <ImageIcon className="w-4 h-4 text-emerald-400" />
+              <label className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <ImageIcon className="w-4 h-4 text-emerald-600" />
                 <span>2. Upload App Icon</span>
               </label>
               <span className="text-[11px] text-slate-400">PNG, JPG or WebP</span>
@@ -319,7 +319,7 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
               {/* Preview icon */}
               <div 
                 onClick={() => iconInputRef.current?.click()}
-                className="relative w-20 h-20 rounded-2xl overflow-hidden bg-nur-navy border-2 border-dashed border-nur-border hover:border-emerald-400 flex items-center justify-center shrink-0 cursor-pointer shadow-md group"
+                className="relative w-20 h-20 rounded-2xl overflow-hidden bg-slate-50 border-2 border-dashed border-slate-300 hover:border-emerald-500 flex items-center justify-center shrink-0 cursor-pointer shadow-xs group"
               >
                 {iconUrl ? (
                   <img
@@ -328,7 +328,7 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
                     className="w-full h-full object-cover group-hover:opacity-75 transition-opacity"
                   />
                 ) : (
-                  <ImageIcon className="w-8 h-8 text-slate-500 group-hover:text-emerald-400" />
+                  <ImageIcon className="w-8 h-8 text-slate-400 group-hover:text-emerald-500" />
                 )}
               </div>
 
@@ -336,7 +336,7 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
                 <button
                   type="button"
                   onClick={() => iconInputRef.current?.click()}
-                  className="px-4 py-2 rounded-xl bg-nur-surface hover:bg-nur-hover border border-nur-border text-xs font-semibold text-slate-200 hover:text-white transition-colors"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-semibold text-slate-700 hover:text-slate-900 transition-colors"
                 >
                   Choose Icon Image...
                 </button>
@@ -348,7 +348,7 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
           </div>
 
           <div className="mt-3">
-            <label className="block text-[11px] font-medium text-slate-400 mb-1">
+            <label className="block text-[11px] font-medium text-slate-500 mb-1">
               Or image icon web URL:
             </label>
             <input
@@ -356,7 +356,7 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
               value={iconUrl}
               onChange={(e) => setIconUrl(e.target.value)}
               placeholder="https://images.unsplash.com/... or /logo.png"
-              className="w-full px-3 py-2 rounded-xl bg-nur-surface border border-nur-border text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-nur-gold"
+              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-500"
             />
           </div>
         </div>
@@ -365,7 +365,7 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
 
       {/* 3. Down App Name */}
       <div>
-        <label className="block text-sm font-bold text-slate-100 mb-1.5">
+        <label className="block text-sm font-bold text-slate-900 mb-1.5">
           3. App Name *
         </label>
         <input
@@ -374,14 +374,14 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="e.g. Nur Quran Pro, Noor Messenger, Halal Radar..."
-          className="w-full px-4 py-3 rounded-xl bg-nur-dark border border-nur-border text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-nur-gold"
+          className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500"
         />
       </div>
 
       {/* 4. Down App Description (Short description) */}
       <div>
         <div className="flex items-center justify-between mb-1.5">
-          <label className="text-sm font-bold text-slate-100">
+          <label className="text-sm font-bold text-slate-900">
             4. App Description (Short Summary)
           </label>
           <span className="text-xs text-slate-500">Seen on store browse cards</span>
@@ -391,14 +391,14 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
           value={shortDescription}
           onChange={(e) => setShortDescription(e.target.value)}
           placeholder="One-line compelling overview of your app..."
-          className="w-full px-4 py-3 rounded-xl bg-nur-dark border border-nur-border text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-nur-gold"
+          className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500"
         />
       </div>
 
       {/* 5. Down App More Description (Full / Detailed description) */}
       <div>
         <div className="flex items-center justify-between mb-1.5">
-          <label className="text-sm font-bold text-slate-100">
+          <label className="text-sm font-bold text-slate-900">
             5. App More Description (Full Detailed Overview & Features)
           </label>
           <span className="text-xs text-slate-500">Supports markdown and bullet points</span>
@@ -408,17 +408,17 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
           value={fullDescription}
           onChange={(e) => setFullDescription(e.target.value)}
           placeholder="Detailed description, key features, instructions, and updates..."
-          className="w-full p-4 rounded-xl bg-nur-dark border border-nur-border text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-nur-gold resize-y leading-relaxed"
+          className="w-full p-4 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 resize-y leading-relaxed"
         />
       </div>
 
       {/* 6. Down How Many Stars */}
-      <div className="p-4 rounded-2xl bg-nur-dark/80 border border-nur-border">
-        <label className="block text-sm font-bold text-slate-100 mb-2">
+      <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs">
+        <label className="block text-sm font-bold text-slate-900 mb-2">
           6. How Many Stars (Initial Rating)
         </label>
         <div className="flex flex-wrap items-center gap-4">
-          <div className="flex items-center gap-1.5 bg-nur-navy px-3 py-2 rounded-xl border border-nur-border">
+          <div className="flex items-center gap-1.5 bg-slate-50 px-3 py-2 rounded-xl border border-slate-200">
             {[1, 2, 3, 4, 5].map((s) => (
               <button
                 type="button"
@@ -430,7 +430,7 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
                   className={`w-6 h-6 ${
                     s <= Math.round(rating)
                       ? 'fill-amber-400 text-amber-400'
-                      : 'text-slate-600'
+                      : 'text-slate-300'
                   }`}
                 />
               </button>
@@ -438,7 +438,7 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs text-slate-400 font-medium">Or type exact value:</span>
+            <span className="text-xs text-slate-500 font-medium">Or type exact value:</span>
             <input
               type="number"
               step="0.1"
@@ -446,7 +446,7 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
               max="5.0"
               value={rating}
               onChange={(e) => setRating(parseFloat(e.target.value) || 5.0)}
-              className="w-20 px-3 py-2 rounded-xl bg-nur-surface border border-nur-border text-sm font-bold text-amber-400 focus:outline-none focus:border-nur-gold text-center"
+              className="w-20 px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-sm font-bold text-amber-500 focus:outline-none focus:border-amber-400 text-center"
             />
             <span className="text-xs text-slate-400">/ 5.0 Stars</span>
           </div>
@@ -456,11 +456,11 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
       {/* Additional App Store Options: Category, Version, Developer, Android Version */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1">Category</label>
+          <label className="block text-xs font-semibold text-slate-700 mb-1">Category</label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value as AppCategory)}
-            className="w-full px-3 py-2.5 rounded-xl bg-nur-dark border border-nur-border text-xs text-slate-200 focus:outline-none focus:border-nur-gold"
+            className="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
           >
             <option value="Islamic & Quran">Islamic & Quran</option>
             <option value="Tools & Utilities">Tools & Utilities</option>
@@ -473,46 +473,46 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1">Version</label>
+          <label className="block text-xs font-semibold text-slate-700 mb-1">Version</label>
           <input
             type="text"
             value={version}
             onChange={(e) => setVersion(e.target.value)}
             placeholder="1.0.0"
-            className="w-full px-3 py-2.5 rounded-xl bg-nur-dark border border-nur-border text-xs text-slate-200 focus:outline-none focus:border-nur-gold"
+            className="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1">Developer Name</label>
+          <label className="block text-xs font-semibold text-slate-700 mb-1">Developer Name</label>
           <input
             type="text"
             value={developer}
             onChange={(e) => setDeveloper(e.target.value)}
             placeholder="Developer or Studio"
-            className="w-full px-3 py-2.5 rounded-xl bg-nur-dark border border-nur-border text-xs text-slate-200 focus:outline-none focus:border-nur-gold"
+            className="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1">Min Android</label>
+          <label className="block text-xs font-semibold text-slate-700 mb-1">Min Android</label>
           <input
             type="text"
             value={requiresAndroid}
             onChange={(e) => setRequiresAndroid(e.target.value)}
             placeholder="Android 8.0 and up"
-            className="w-full px-3 py-2.5 rounded-xl bg-nur-dark border border-nur-border text-xs text-slate-200 focus:outline-none focus:border-nur-gold"
+            className="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
           />
         </div>
       </div>
 
       {/* Screenshots upload & management */}
-      <div className="p-4 rounded-2xl bg-nur-dark/80 border border-nur-border">
+      <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs">
         <div className="flex items-center justify-between mb-2">
-          <label className="text-xs font-bold text-slate-200">
+          <label className="text-xs font-bold text-slate-900">
             App Screenshots (Visual Showcase)
           </label>
-          <span className="text-[11px] text-slate-400">{screenshots.length} screenshots added</span>
+          <span className="text-[11px] text-slate-500">{screenshots.length} screenshots added</span>
         </div>
 
         <input
@@ -525,12 +525,12 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
 
         <div className="flex flex-wrap gap-3 mb-3">
           {screenshots.map((url, i) => (
-            <div key={i} className="relative w-20 h-32 rounded-xl overflow-hidden border border-nur-border group">
+            <div key={i} className="relative w-20 h-32 rounded-xl overflow-hidden border border-slate-200 group">
               <img src={url} alt={`Screenshot ${i + 1}`} className="w-full h-full object-cover" />
               <button
                 type="button"
                 onClick={() => handleRemoveScreenshot(i)}
-                className="absolute top-1 right-1 p-1 rounded-full bg-red-600/80 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute top-1 right-1 p-1 rounded-full bg-red-600 text-white opacity-0 group-hover:opacity-100 transition-opacity"
               >
                 <Trash2 className="w-3 h-3" />
               </button>
@@ -541,7 +541,7 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
           <button
             type="button"
             onClick={() => screenshotInputRef.current?.click()}
-            className="w-20 h-32 rounded-xl border-2 border-dashed border-nur-border hover:border-nur-gold flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-nur-gold bg-nur-navy/40 transition-colors"
+            className="w-20 h-32 rounded-xl border-2 border-dashed border-slate-300 hover:border-blue-500 flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-blue-600 bg-slate-50 hover:bg-blue-50/40 transition-colors"
           >
             <Plus className="w-5 h-5" />
             <span className="text-[10px] font-semibold">Upload</span>
@@ -554,12 +554,12 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
             value={newScreenshotUrl}
             onChange={(e) => setNewScreenshotUrl(e.target.value)}
             placeholder="Or paste screenshot image URL..."
-            className="flex-1 px-3 py-1.5 rounded-xl bg-nur-surface border border-nur-border text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-nur-gold"
+            className="flex-1 px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500"
           />
           <button
             type="button"
             onClick={handleAddScreenshotUrl}
-            className="px-3 py-1.5 rounded-xl bg-nur-navy hover:bg-nur-surface border border-nur-border text-xs font-semibold text-slate-200"
+            className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-semibold text-slate-700 hover:text-slate-900"
           >
             Add URL
           </button>
@@ -573,21 +573,21 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
           id="featuredCheckbox"
           checked={featured}
           onChange={(e) => setFeatured(e.target.checked)}
-          className="w-4 h-4 rounded border-nur-border text-nur-gold focus:ring-nur-gold/40"
+          className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
         />
-        <label htmlFor="featuredCheckbox" className="text-xs font-semibold text-slate-300 cursor-pointer">
+        <label htmlFor="featuredCheckbox" className="text-xs font-semibold text-slate-700 cursor-pointer">
           Feature this app in Hero Spotlight banner
         </label>
       </div>
 
       {/* Submit Buttons */}
-      <div className="pt-4 border-t border-nur-border flex items-center justify-end gap-3">
+      <div className="pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
         {onCancel && (
           <button
             type="button"
             onClick={onCancel}
             disabled={isUploading}
-            className="px-5 py-2.5 rounded-xl bg-nur-surface hover:bg-nur-hover border border-nur-border text-xs font-semibold text-slate-300 transition-colors"
+            className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-semibold text-slate-700 transition-colors"
           >
             Cancel
           </button>
@@ -596,7 +596,7 @@ export default function AdminAppForm({ initialData, onSuccess, onCancel }: Admin
         <button
           type="submit"
           disabled={isUploading}
-          className="btn-gold px-8 py-3 rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg disabled:opacity-50"
+          className="px-8 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold flex items-center gap-2 shadow-md hover:shadow-lg transition-all disabled:opacity-50"
         >
           {isUploading ? (
             <>

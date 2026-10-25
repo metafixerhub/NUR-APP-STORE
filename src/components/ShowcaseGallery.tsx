@@ -100,13 +100,13 @@ export default function ShowcaseGallery() {
   };
 
   return (
-    <div className="w-full bg-[#EEF2F6] dark:bg-[#071322] min-h-screen py-8 px-4 sm:px-6 lg:px-8 transition-colors">
+    <div className="w-full bg-white min-h-screen py-8 px-4 sm:px-6 lg:px-8">
       
       {/* ========================================================
           TOP HEADER - DITTO MATCH WITH SHOWCASE IMAGE
           ======================================================== */}
       <div className="max-w-7xl mx-auto mb-10">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-300 dark:border-slate-800">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-100">
           
           {/* Logo & Title */}
           <div className="flex items-center gap-5">

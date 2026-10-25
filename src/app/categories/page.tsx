@@ -162,18 +162,18 @@ export default function CategoriesPage() {
                 router.back();
               }
             }}
-            className="p-2 rounded-full hover:bg-nur-surface transition-colors text-slate-200"
+            className="p-2 rounded-full hover:bg-slate-100 transition-colors text-slate-700"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
-          <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
             {selectedCategory ? `${selectedCategory} Apps` : 'Categories'}
           </h1>
         </div>
 
         <NextLink
           href="/search"
-          className="p-2 rounded-full hover:bg-nur-surface transition-colors text-slate-300 hover:text-white"
+          className="p-2 rounded-full hover:bg-slate-100 transition-colors text-slate-600 hover:text-slate-900"
         >
           <Search className="w-5 h-5" />
         </NextLink>
@@ -218,15 +218,15 @@ export default function CategoriesPage() {
             </span>
             <button
               onClick={() => setSelectedCategory(null)}
-              className="text-xs text-nur-gold hover:underline font-bold"
+              className="text-xs text-blue-600 hover:underline font-bold"
             >
               View all categories
             </button>
           </div>
 
           {filteredApps.length === 0 ? (
-            <div className="p-12 text-center rounded-2xl bg-nur-navy/40 border border-nur-border">
-              <p className="text-sm font-bold text-slate-300">No apps currently in this category.</p>
+            <div className="p-12 text-center rounded-2xl bg-slate-50 border border-slate-200">
+              <p className="text-sm font-bold text-slate-800">No apps currently in this category.</p>
               <p className="text-xs text-slate-500 mt-1">Publish an app in this category via the Admin Portal!</p>
             </div>
           ) : (

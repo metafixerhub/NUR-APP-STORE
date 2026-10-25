@@ -40,7 +40,7 @@ export default function MobileBottomNav() {
   ];
 
   return (
-    <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-nur-midnight/95 backdrop-blur-xl border-t border-slate-200 dark:border-nur-border/80 px-2 py-2 safe-bottom shadow-2xl">
+    <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-xl border-t border-slate-200 px-2 py-2 safe-bottom shadow-lg">
       <div className="flex items-center justify-around">
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -51,8 +51,8 @@ export default function MobileBottomNav() {
               href={item.href}
               className={`relative flex flex-col items-center justify-center py-1 px-4 rounded-xl transition-all ${
                 active
-                  ? 'text-blue-600 dark:text-blue-400 font-bold scale-105'
-                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 font-medium'
+                  ? 'text-blue-600 font-bold scale-105'
+                  : 'text-slate-500 hover:text-slate-900 font-medium'
               }`}
             >
               <div className="relative p-1">

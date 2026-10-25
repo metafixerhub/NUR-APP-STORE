@@ -134,22 +134,22 @@ export default function HomePage() {
         {desktopView === 'showcase' ? (
           <div>
             {/* View Mode Toggle at Top */}
-            <div className="bg-slate-900 text-white py-2 px-6 flex items-center justify-between text-xs border-b border-slate-800">
-              <span className="font-semibold text-slate-300">
-                ⭐ <strong>Ditto Showcase Mode Active</strong> — Matching your mobile UI showcase design
+            <div className="bg-white text-slate-800 py-2.5 px-6 flex items-center justify-between text-xs border-b border-slate-200 shadow-xs">
+              <span className="font-semibold text-slate-600">
+                ⭐ <strong className="text-slate-900">Ditto Showcase Mode Active</strong> — 100% Matching your UI showcase design
               </span>
 
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setDesktopView('single')}
-                  className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 font-medium transition-colors"
                 >
-                  <Smartphone className="w-3.5 h-3.5 text-blue-400" />
+                  <Smartphone className="w-3.5 h-3.5 text-blue-600" />
                   <span>Single Phone Interactive View</span>
                 </button>
                 <NextLink
                   href="/admin"
-                  className="px-3 py-1 rounded-lg bg-blue-600 hover:bg-blue-700 font-bold text-white transition-colors"
+                  className="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 font-bold text-white shadow-sm transition-colors"
                 >
                   Admin Portal
                 </NextLink>
@@ -159,19 +159,19 @@ export default function HomePage() {
             <ShowcaseGallery />
           </div>
         ) : (
-          <div className="min-h-screen bg-slate-900 py-10 flex flex-col items-center justify-center">
+          <div className="min-h-screen bg-slate-50 py-10 flex flex-col items-center justify-center">
             {/* Toggle back to showcase */}
             <div className="mb-6 flex items-center gap-4">
               <button
                 onClick={() => setDesktopView('showcase')}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-lg transition-all"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md transition-all"
               >
                 <Monitor className="w-4 h-4" />
                 <span>Switch to 5-Screen UI Showcase</span>
               </button>
               <NextLink
                 href="/admin"
-                className="px-4 py-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-700 transition-all"
+                className="px-4 py-2 rounded-full bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs border border-slate-300 shadow-xs transition-all"
               >
                 Admin Portal
               </NextLink>

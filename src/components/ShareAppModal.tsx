@@ -39,7 +39,8 @@ export default function ShareAppModal({
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const origin = window.location.origin;
-      setShareUrl(`${origin}/app/${app.id}`);
+      const base = process.env.NEXT_PUBLIC_BASE_PATH || '';
+      setShareUrl(`${origin}${base}/app/${app.id}`);
     }
   }, [app.id]);
 
@@ -88,22 +89,22 @@ export default function ShareAppModal({
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(shareUrl)}&color=050D18&bgcolor=FFFFFF`;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fade-in">
       <div 
-        className="relative w-full max-w-lg rounded-3xl bg-nur-navy/95 border border-nur-border shadow-2xl p-6 sm:p-8 backdrop-blur-xl"
+        className="relative w-full max-w-lg rounded-3xl bg-white border border-slate-200 shadow-2xl p-6 sm:p-8"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-full bg-nur-surface hover:bg-nur-hover text-slate-400 hover:text-white transition-colors"
+          className="absolute top-5 right-5 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">
-          <div className="relative w-16 h-16 rounded-2xl overflow-hidden shrink-0 border border-nur-gold/40 shadow-lg bg-nur-midnight">
+          <div className="relative w-16 h-16 rounded-2xl overflow-hidden shrink-0 border border-slate-200 shadow-sm bg-slate-50">
             <Image
               src={app.iconUrl || '/logo.png'}
               alt={app.name}
@@ -113,23 +114,23 @@ export default function ShareAppModal({
             />
           </div>
           <div>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-nur-gold/15 text-nur-gold text-[10px] font-bold uppercase tracking-wider border border-nur-gold/30 mb-1">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 text-[10px] font-bold uppercase tracking-wider border border-blue-200 mb-1">
               <Share2 className="w-3 h-3" />
               <span>Shareable APK Link</span>
             </div>
-            <h3 className="text-lg font-bold text-white leading-tight">{app.name}</h3>
-            <p className="text-xs text-slate-400 mt-0.5">{subtitle}</p>
+            <h3 className="text-lg font-bold text-slate-900 leading-tight">{app.name}</h3>
+            <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>
           </div>
         </div>
 
         {/* Tab switch (Link vs QR Code) */}
-        <div className="flex rounded-xl bg-nur-dark/80 p-1 border border-nur-border mb-5">
+        <div className="flex rounded-xl bg-slate-100 p-1 border border-slate-200 mb-5">
           <button
             onClick={() => setActiveTab('link')}
             className={`flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${
               activeTab === 'link'
-                ? 'bg-nur-surface text-nur-gold shadow-sm'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-white text-blue-600 shadow-xs'
+                : 'text-slate-500 hover:text-slate-900'
             }`}
           >
             <Share2 className="w-3.5 h-3.5" />
@@ -140,8 +141,8 @@ export default function ShareAppModal({
             onClick={() => setActiveTab('qr')}
             className={`flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${
               activeTab === 'qr'
-                ? 'bg-nur-surface text-nur-gold shadow-sm'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-white text-blue-600 shadow-xs'
+                : 'text-slate-500 hover:text-slate-900'
             }`}
           >
             <QrCode className="w-3.5 h-3.5" />
@@ -155,22 +156,22 @@ export default function ShareAppModal({
             
             {/* The Special Link Box */}
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                 Special Direct Link for this App:
               </label>
-              <div className="flex items-center gap-2 p-2 rounded-2xl bg-nur-dark border border-nur-border focus-within:border-nur-gold transition-colors">
+              <div className="flex items-center gap-2 p-2 rounded-2xl bg-slate-50 border border-slate-200 focus-within:border-blue-500 transition-colors">
                 <input
                   type="text"
                   readOnly
                   value={shareUrl}
-                  className="flex-1 bg-transparent px-2 text-xs text-slate-200 select-all focus:outline-none truncate font-mono"
+                  className="flex-1 bg-transparent px-2 text-xs text-slate-900 select-all focus:outline-none truncate font-mono"
                 />
                 <button
                   onClick={handleCopy}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all ${
+                  className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs ${
                     copied
                       ? 'bg-emerald-600 text-white'
-                      : 'btn-gold text-nur-dark shadow-md'
+                      : 'bg-blue-600 hover:bg-blue-700 text-white'
                   }`}
                 >
                   {copied ? (
@@ -190,7 +191,7 @@ export default function ShareAppModal({
 
             {/* Quick Social Share Buttons */}
             <div>
-              <label className="block text-xs font-semibold text-slate-400 mb-2">
+              <label className="block text-xs font-semibold text-slate-500 mb-2">
                 Or share directly via:
               </label>
               <div className="grid grid-cols-3 gap-2.5">
@@ -200,7 +201,7 @@ export default function ShareAppModal({
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-emerald-600/15 hover:bg-emerald-600/25 border border-emerald-500/30 text-emerald-400 text-xs font-bold transition-colors"
+                  className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-700 text-xs font-bold transition-colors"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>WhatsApp</span>
@@ -211,7 +212,7 @@ export default function ShareAppModal({
                   href={telegramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-blue-500/15 hover:bg-blue-500/25 border border-blue-500/30 text-blue-400 text-xs font-bold transition-colors"
+                  className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-700 text-xs font-bold transition-colors"
                 >
                   <Send className="w-4 h-4" />
                   <span>Telegram</span>
@@ -220,7 +221,7 @@ export default function ShareAppModal({
                 {/* Native / Mobile Share */}
                 <button
                   onClick={handleNativeShare}
-                  className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-400 text-xs font-bold transition-colors"
+                  className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-700 text-xs font-bold transition-colors"
                 >
                   <Smartphone className="w-4 h-4" />
                   <span>Share App</span>
@@ -235,9 +236,9 @@ export default function ShareAppModal({
                 href={shareUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 rounded-xl bg-nur-surface hover:bg-nur-hover border border-nur-border text-xs font-semibold text-slate-300 hover:text-white flex items-center justify-center gap-2 transition-colors"
+                className="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-semibold text-slate-700 hover:text-slate-900 flex items-center justify-center gap-2 transition-colors"
               >
-                <ExternalLink className="w-3.5 h-3.5 text-nur-gold" />
+                <ExternalLink className="w-3.5 h-3.5 text-blue-600" />
                 <span>Open & Test Special Link</span>
               </a>
             </div>
@@ -248,7 +249,7 @@ export default function ShareAppModal({
         {/* TAB 2: QR CODE */}
         {activeTab === 'qr' && (
           <div className="flex flex-col items-center text-center space-y-4 py-2">
-            <div className="p-4 rounded-2xl bg-white shadow-xl border-4 border-nur-gold/40">
+            <div className="p-4 rounded-2xl bg-white shadow-md border-2 border-slate-200">
               <img
                 src={qrCodeUrl}
                 alt={`QR code for ${app.name}`}
@@ -257,17 +258,17 @@ export default function ShareAppModal({
             </div>
 
             <div>
-              <p className="text-xs font-bold text-slate-200">
+              <p className="text-xs font-bold text-slate-900">
                 Scan with any phone camera
               </p>
-              <p className="text-[11px] text-slate-400 mt-1 max-w-xs">
+              <p className="text-[11px] text-slate-500 mt-1 max-w-xs">
                 Directly opens {app.name} on Nur App Store so users can download the APK file immediately.
               </p>
             </div>
 
             <button
               onClick={handleCopy}
-              className="btn-gold px-5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-md"
+              className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all"
             >
               {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
               <span>{copied ? 'Link Copied!' : 'Copy Share Link'}</span>

@@ -122,27 +122,27 @@ export default function CommentSection({
   };
 
   return (
-    <div className="my-10 pt-8 border-t border-nur-border">
+    <div className="my-10 pt-8 border-t border-slate-200">
       
       {/* Section Title */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
             <span>Ratings & Reviews</span>
-            <span className="text-xs px-2.5 py-0.5 rounded-full bg-nur-gold/15 text-nur-gold font-bold border border-nur-gold/30">
+            <span className="text-xs px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 font-bold border border-blue-200">
               Community
             </span>
           </h2>
-          <p className="text-xs text-slate-400 mt-1">Verified feedback from Nur App Store members</p>
+          <p className="text-xs text-slate-500 mt-1">Verified feedback from Nur App Store members</p>
         </div>
       </div>
 
       {/* Ratings summary and distribution */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 rounded-2xl bg-nur-navy/80 border border-nur-border mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 rounded-2xl bg-white border border-slate-200 mb-8 shadow-xs">
         
         {/* Left score */}
-        <div className="md:col-span-4 flex flex-col items-center justify-center text-center p-4 border-b md:border-b-0 md:border-r border-nur-border/70">
-          <div className="text-5xl font-black text-gold-gradient mb-2">
+        <div className="md:col-span-4 flex flex-col items-center justify-center text-center p-4 border-b md:border-b-0 md:border-r border-slate-200">
+          <div className="text-5xl font-black text-amber-500 mb-2">
             {overallRating ? overallRating.toFixed(1) : '5.0'}
           </div>
           <div className="flex items-center gap-1 mb-2">
@@ -152,12 +152,12 @@ export default function CommentSection({
                 className={`w-5 h-5 ${
                   s <= Math.round(overallRating)
                     ? 'fill-amber-400 text-amber-400'
-                    : 'text-slate-600'
+                    : 'text-slate-200'
                 }`}
               />
             ))}
           </div>
-          <p className="text-xs text-slate-300 font-medium">
+          <p className="text-xs text-slate-600 font-medium">
             Based on {totalReviews.toLocaleString()} ratings
           </p>
         </div>
@@ -170,16 +170,16 @@ export default function CommentSection({
 
             return (
               <div key={stars} className="flex items-center gap-3 text-xs">
-                <span className="w-8 font-semibold text-slate-300 flex items-center gap-1 justify-end">
+                <span className="w-8 font-semibold text-slate-700 flex items-center gap-1 justify-end">
                   {stars} <Star className="w-3 h-3 fill-amber-400 text-amber-400 inline" />
                 </span>
-                <div className="flex-1 h-2.5 bg-nur-dark rounded-full overflow-hidden border border-nur-border/50">
+                <div className="flex-1 h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
                   <div
                     className="h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full transition-all duration-500"
                     style={{ width: `${percent}%` }}
                   />
                 </div>
-                <span className="w-10 text-right text-slate-400 text-[11px]">{percent}%</span>
+                <span className="w-10 text-right text-slate-500 text-[11px]">{percent}%</span>
               </div>
             );
           })}
@@ -188,16 +188,16 @@ export default function CommentSection({
       </div>
 
       {/* Community Comment Search Bar (User specifically asked: "then down community comment search") */}
-      <div className="p-4 rounded-2xl bg-nur-surface/60 border border-nur-border mb-8">
+      <div className="p-4 rounded-2xl bg-white border border-slate-200 mb-8 shadow-xs">
         <div className="flex flex-col sm:flex-row items-center gap-3">
           <div className="relative flex-1 w-full">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-nur-gold" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search community reviews and comments..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-nur-dark border border-nur-border text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-nur-gold transition-all"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-all"
             />
           </div>
 
@@ -207,8 +207,8 @@ export default function CommentSection({
               onClick={() => setStarFilter(null)}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
                 starFilter === null
-                  ? 'bg-nur-gold text-nur-dark font-bold'
-                  : 'bg-nur-navy text-slate-300 hover:text-white border border-nur-border'
+                  ? 'bg-blue-600 text-white font-bold'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200'
               }`}
             >
               All Stars
@@ -219,23 +219,23 @@ export default function CommentSection({
                 onClick={() => setStarFilter(starFilter === s ? null : s)}
                 className={`flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
                   starFilter === s
-                    ? 'bg-nur-gold text-nur-dark font-bold'
-                    : 'bg-nur-navy text-slate-300 hover:text-white border border-nur-border'
+                    ? 'bg-blue-600 text-white font-bold'
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200'
                 }`}
               >
                 <span>{s}</span>
-                <Star className={`w-3 h-3 ${starFilter === s ? 'fill-nur-dark' : 'fill-amber-400 text-amber-400'}`} />
+                <Star className={`w-3 h-3 ${starFilter === s ? 'fill-white text-white' : 'fill-amber-400 text-amber-400'}`} />
               </button>
             ))}
           </div>
         </div>
 
         {searchQuery && (
-          <div className="mt-2 text-xs text-slate-400 flex items-center justify-between">
+          <div className="mt-2 text-xs text-slate-500 flex items-center justify-between">
             <span>Showing results for "{searchQuery}"</span>
             <button
               onClick={() => setSearchQuery('')}
-              className="text-nur-gold hover:underline text-xs"
+              className="text-blue-600 hover:underline text-xs font-semibold"
             >
               Clear search
             </button>
@@ -244,18 +244,18 @@ export default function CommentSection({
       </div>
 
       {/* Add Review Box */}
-      <div className="p-6 rounded-2xl bg-nur-navy/90 border border-nur-border/90 mb-8 shadow-lg">
-        <h3 className="text-base font-bold text-white mb-2 flex items-center gap-2">
-          <MessageSquare className="w-4 h-4 text-nur-gold" />
+      <div className="p-6 rounded-2xl bg-white border border-slate-200 mb-8 shadow-xs">
+        <h3 className="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
+          <MessageSquare className="w-4 h-4 text-blue-600" />
           <span>Write a Review</span>
         </h3>
-        <p className="text-xs text-slate-400 mb-4">
+        <p className="text-xs text-slate-500 mb-4">
           Share your experience with this app. Account is optional — anyone can review!
         </p>
 
         {feedbackMsg && (
-          <div className="mb-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+          <div className="mb-4 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
             <span>{feedbackMsg}</span>
           </div>
         )}
@@ -264,7 +264,7 @@ export default function CommentSection({
           
           {/* Star selector */}
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-700 mb-1.5">
               Your Rating (1 to 5 Stars):
             </label>
             <div className="flex items-center gap-2">
@@ -280,13 +280,13 @@ export default function CommentSection({
                   <Star
                     className={`w-7 h-7 cursor-pointer ${
                       s <= (hoverRating ?? userRating)
-                        ? 'fill-amber-400 text-amber-400 drop-shadow-md'
-                        : 'text-slate-600'
+                        ? 'fill-amber-400 text-amber-400 drop-shadow-sm'
+                        : 'text-slate-200'
                     }`}
                   />
                 </button>
               ))}
-              <span className="ml-2 text-sm font-bold text-amber-400">
+              <span className="ml-2 text-sm font-bold text-amber-500">
                 {hoverRating ?? userRating} / 5 Stars
               </span>
             </div>
@@ -294,24 +294,24 @@ export default function CommentSection({
 
           {/* Author Name */}
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 mb-1">
               Your Name / Nickname (Optional):
             </label>
             <div className="relative">
-              <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
                 type="text"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
                 placeholder="e.g. Tariq, Sarah, Guest User..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-nur-dark border border-nur-border text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-nur-gold"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500"
               />
             </div>
           </div>
 
           {/* Comment text */}
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 mb-1">
               Your Review & Comments:
             </label>
             <textarea
@@ -320,7 +320,7 @@ export default function CommentSection({
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
               placeholder="What do you think of this app? What features do you like?"
-              className="w-full p-3 rounded-xl bg-nur-dark border border-nur-border text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-nur-gold resize-none"
+              className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 resize-none"
             />
           </div>
 
@@ -328,7 +328,7 @@ export default function CommentSection({
             <button
               type="submit"
               disabled={isSubmitting || !commentText.trim()}
-              className="btn-gold px-6 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-xs transition-all"
             >
               <Send className="w-3.5 h-3.5" />
               <span>{isSubmitting ? 'Posting...' : 'Post Review'}</span>
@@ -340,26 +340,26 @@ export default function CommentSection({
       {/* Comments List */}
       <div className="space-y-4">
         {filteredComments.length === 0 ? (
-          <div className="p-8 text-center rounded-2xl bg-nur-navy/40 border border-nur-border text-slate-400">
+          <div className="p-8 text-center rounded-2xl bg-slate-50 border border-slate-200 text-slate-500">
             <p className="text-sm font-medium">No reviews match your search or filter.</p>
-            <p className="text-xs text-slate-500 mt-1">Be the first to share your thoughts!</p>
+            <p className="text-xs text-slate-400 mt-1">Be the first to share your thoughts!</p>
           </div>
         ) : (
           filteredComments.map((comment) => (
             <div
               key={comment.id}
-              className="p-5 rounded-2xl bg-nur-navy/60 border border-nur-border/70 hover:border-nur-border transition-colors"
+              className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs hover:border-slate-300 transition-colors"
             >
               <div className="flex items-start justify-between gap-3 mb-2">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-nur-gold to-amber-600 flex items-center justify-center font-bold text-xs text-nur-dark shadow-sm shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs shadow-xs shrink-0">
                     {comment.userName.charAt(0).toUpperCase()}
                   </div>
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <span className="text-sm font-bold text-slate-200">{comment.userName}</span>
+                      <span className="text-sm font-bold text-slate-900">{comment.userName}</span>
                       {comment.verified && (
-                        <span className="flex items-center gap-0.5 text-[10px] text-emerald-400 font-medium">
+                        <span className="flex items-center gap-0.5 text-[10px] text-emerald-600 font-medium">
                           <CheckCircle2 className="w-3 h-3" />
                           <span>Verified User</span>
                         </span>
@@ -376,21 +376,21 @@ export default function CommentSection({
                       className={`w-3.5 h-3.5 ${
                         s <= comment.rating
                           ? 'fill-amber-400 text-amber-400'
-                          : 'text-slate-600'
+                          : 'text-slate-200'
                       }`}
                     />
                   ))}
                 </div>
               </div>
 
-              <p className="text-sm text-slate-300 leading-relaxed mb-3">
+              <p className="text-sm text-slate-700 leading-relaxed mb-3">
                 {comment.comment}
               </p>
 
               <div className="flex items-center justify-end">
                 <button
                   onClick={() => handleLike(comment.id)}
-                  className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-nur-gold transition-colors px-2 py-1 rounded-lg hover:bg-nur-surface"
+                  className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-blue-600 transition-colors px-2 py-1 rounded-lg hover:bg-slate-100"
                   title="Mark as helpful"
                 >
                   <ThumbsUp className="w-3.5 h-3.5" />
