@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAppById, addCommentToApp } from '@/lib/store';
+import { syncCommentToMongoCluster } from '@/lib/mongoIntegration';
 import { CommentItem } from '@/types/app';
 
 export const dynamic = 'force-dynamic';
@@ -50,6 +51,8 @@ export async function POST(
     if (!updatedApp) {
       return NextResponse.json({ success: false, error: 'App not found' }, { status: 404 });
     }
+
+    syncCommentToMongoCluster(id, newComment);
 
     return NextResponse.json({ 
       success: true, 

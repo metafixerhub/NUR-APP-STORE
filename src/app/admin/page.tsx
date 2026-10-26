@@ -22,12 +22,14 @@ import {
   MessageSquare,
   Search,
   Sparkles,
-  Share2
+  Share2,
+  Database
 } from 'lucide-react';
 import { AppItem } from '@/types/app';
 import { INITIAL_APPS } from '@/data/initialApps';
 import AdminAppForm from '@/components/AdminAppForm';
 import ShareAppModal from '@/components/ShareAppModal';
+import AdminMongoClusterManager from '@/components/AdminMongoClusterManager';
 
 export default function AdminPortalPage() {
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
@@ -39,7 +41,7 @@ export default function AdminPortalPage() {
   const [loginError, setLoginError] = useState('');
 
   // Dashboard state
-  const [activeTab, setActiveTab] = useState<'publish' | 'manage' | 'comments'>('publish');
+  const [activeTab, setActiveTab] = useState<'publish' | 'manage' | 'comments' | 'database'>('publish');
   const [apps, setApps] = useState<AppItem[]>(INITIAL_APPS);
   const [editingApp, setEditingApp] = useState<AppItem | null>(null);
   const [searchManageQuery, setSearchManageQuery] = useState('');
@@ -363,6 +365,24 @@ export default function AdminPortalPage() {
           <MessageSquare className="w-4 h-4" />
           <span>All Community Comments ({totalComments})</span>
         </button>
+
+        <button
+          onClick={() => {
+            setActiveTab('database');
+            setEditingApp(null);
+          }}
+          className={`flex items-center gap-2 px-5 py-3 border-b-2 text-xs font-bold whitespace-nowrap transition-all ${
+            activeTab === 'database'
+              ? 'border-emerald-600 text-emerald-600 bg-emerald-50/50'
+              : 'border-transparent text-slate-500 hover:text-slate-800'
+          }`}
+        >
+          <Database className="w-4 h-4" />
+          <span>MongoDB Clusters (10 Clusters)</span>
+          <span className="px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[9px] font-black">
+            LIVE
+          </span>
+        </button>
       </div>
 
       {/* TAB 1: PUBLISH / EDIT FORM */}
@@ -591,6 +611,11 @@ export default function AdminPortalPage() {
             )}
           </div>
         </div>
+      )}
+
+      {/* TAB 4: MONGODB CLUSTERS INTEGRATION */}
+      {activeTab === 'database' && (
+        <AdminMongoClusterManager />
       )}
 
       {/* Special Share Link Modal */}

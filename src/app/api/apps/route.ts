@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllApps, addApp } from '@/lib/store';
+import { syncAppToMongoCluster } from '@/lib/mongoIntegration';
 import { AppItem } from '@/types/app';
 
 export const dynamic = 'force-dynamic';
@@ -88,6 +89,7 @@ export async function POST(request: NextRequest) {
     };
 
     const saved = addApp(newApp);
+    syncAppToMongoCluster(saved, 'create');
     return NextResponse.json({ success: true, app: saved });
   } catch (err: any) {
     return NextResponse.json({ success: false, error: err.message }, { status: 500 });

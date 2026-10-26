@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAppById, updateApp, deleteApp } from '@/lib/store';
+import { syncAppToMongoCluster, pushToMongoCluster } from '@/lib/mongoIntegration';
 
 export const dynamic = 'force-dynamic';
 
@@ -32,6 +33,7 @@ export async function PUT(
       return NextResponse.json({ success: false, error: 'App not found to update' }, { status: 404 });
     }
 
+    syncAppToMongoCluster(updated, 'update');
     return NextResponse.json({ success: true, app: updated });
   } catch (err: any) {
     return NextResponse.json({ success: false, error: err.message }, { status: 500 });
