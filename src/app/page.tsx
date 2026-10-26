@@ -18,28 +18,28 @@ import {
   CloudDownload,
   Grid,
   Star,
-  Monitor,
-  Smartphone
+  Sparkles,
+  ArrowRight
 } from 'lucide-react';
 import { AppItem } from '@/types/app';
 import { INITIAL_APPS } from '@/data/initialApps';
 import AppCard from '@/components/AppCard';
-import SplashScreen from '@/components/SplashScreen';
-import ShowcaseGallery from '@/components/ShowcaseGallery';
 
 const FEATURE_BADGES = [
-  { icon: ShieldCheck, label: 'Safe Apps', color: 'text-emerald-600 bg-white border-emerald-300' },
-  { icon: CloudDownload, label: 'Easy Download', color: 'text-blue-600 bg-white border-blue-300' },
-  { icon: Grid, label: 'Many Categories', color: 'text-pink-600 bg-white border-pink-300' },
-  { icon: Star, label: 'User Friendly', color: 'text-amber-600 bg-white border-amber-300' },
+  { icon: ShieldCheck, label: 'Safe Apps', color: 'text-emerald-700 bg-emerald-50 border-emerald-200' },
+  { icon: CloudDownload, label: 'Easy Download', color: 'text-blue-700 bg-blue-50 border-blue-200' },
+  { icon: Grid, label: 'Many Categories', color: 'text-pink-700 bg-pink-50 border-pink-200' },
+  { icon: Star, label: 'User Friendly', color: 'text-amber-700 bg-amber-50 border-amber-200' },
 ];
 
 const HOME_CATEGORIES = [
   {
     name: 'Education',
     categoryKey: 'Education',
+    count: '150+ Apps',
     icon: GraduationCap,
     bgColor: 'bg-blue-50',
+    hoverBg: 'hover:bg-blue-100/60',
     borderColor: 'border-blue-100',
     iconColor: 'text-blue-600',
     iconBg: 'bg-blue-100',
@@ -47,8 +47,10 @@ const HOME_CATEGORIES = [
   {
     name: 'Productivity',
     categoryKey: 'Productivity',
+    count: '120+ Apps',
     icon: BarChart2,
     bgColor: 'bg-green-50',
+    hoverBg: 'hover:bg-green-100/60',
     borderColor: 'border-green-100',
     iconColor: 'text-green-600',
     iconBg: 'bg-green-100',
@@ -56,8 +58,10 @@ const HOME_CATEGORIES = [
   {
     name: 'Islamic',
     categoryKey: 'Islamic & Quran',
+    count: '80+ Apps',
     icon: Moon,
     bgColor: 'bg-emerald-50',
+    hoverBg: 'hover:bg-emerald-100/60',
     borderColor: 'border-emerald-100',
     iconColor: 'text-emerald-600',
     iconBg: 'bg-emerald-100',
@@ -65,8 +69,10 @@ const HOME_CATEGORIES = [
   {
     name: 'Tools',
     categoryKey: 'Tools & Utilities',
+    count: '100+ Apps',
     icon: Wrench,
     bgColor: 'bg-purple-50',
+    hoverBg: 'hover:bg-purple-100/60',
     borderColor: 'border-purple-100',
     iconColor: 'text-purple-600',
     iconBg: 'bg-purple-100',
@@ -74,17 +80,21 @@ const HOME_CATEGORIES = [
   {
     name: 'Multimedia',
     categoryKey: 'Media & Video',
+    count: '90+ Apps',
     icon: PlayCircle,
     bgColor: 'bg-pink-50',
+    hoverBg: 'hover:bg-pink-100/60',
     borderColor: 'border-pink-100',
     iconColor: 'text-pink-600',
     iconBg: 'bg-pink-100',
   },
   {
     name: 'Lifestyle',
-    categoryKey: 'Islamic & Quran',
+    categoryKey: 'Lifestyle',
+    count: '70+ Apps',
     icon: ShoppingBag,
     bgColor: 'bg-amber-50',
+    hoverBg: 'hover:bg-amber-100/60',
     borderColor: 'border-amber-100',
     iconColor: 'text-amber-600',
     iconBg: 'bg-amber-100',
@@ -95,16 +105,13 @@ export default function HomePage() {
   const router = useRouter();
   const [apps, setApps] = useState<AppItem[]>(INITIAL_APPS);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState<string | null>(null);
-  
-  // On desktop: default to the 5-screen showcase view matching user's image!
-  const [desktopView, setDesktopView] = useState<'showcase' | 'single'>('showcase');
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState<string>('All');
 
   useEffect(() => {
     fetch('/api/apps')
       .then((r) => r.json())
       .then((data) => {
-        if (data.success && data.apps) {
+        if (data.success && Array.isArray(data.apps)) {
           setApps(data.apps);
         }
       })
@@ -118,320 +125,253 @@ export default function HomePage() {
     }
   };
 
-  const popularApps = useMemo(() => {
-    if (selectedCategoryFilter) {
-      return apps.filter((a) => a.category === selectedCategoryFilter);
-    }
-    return apps;
+  const categoriesList = ['All', 'Islamic & Quran', 'Education', 'Productivity', 'Tools & Utilities', 'Media & Video'];
+
+  const filteredApps = useMemo(() => {
+    if (selectedCategoryFilter === 'All') return apps;
+    return apps.filter((a) => a.category === selectedCategoryFilter);
   }, [apps, selectedCategoryFilter]);
 
   return (
-    <>
+    <div className="min-h-screen bg-white text-slate-900 flex flex-col pb-24 sm:pb-16">
+      
       {/* ========================================================
-          DESKTOP VIEW: 5-SCREEN UI SHOWCASE (DITTO MATCH)
+          TOP NAVIGATION BAR (DESKTOP & MOBILE RESPONSIVE)
           ======================================================== */}
-      <div className="hidden lg:block">
-        {desktopView === 'showcase' ? (
-          <div>
-            {/* View Mode Toggle at Top */}
-            <div className="bg-white text-slate-800 py-2.5 px-6 flex items-center justify-between text-xs border-b border-slate-200 shadow-xs">
-              <span className="font-semibold text-slate-600">
-                ⭐ <strong className="text-slate-900">Ditto Showcase Mode Active</strong> — 100% Matching your UI showcase design
-              </span>
-
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => setDesktopView('single')}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 font-medium transition-colors"
-                >
-                  <Smartphone className="w-3.5 h-3.5 text-blue-600" />
-                  <span>Single Phone Interactive View</span>
-                </button>
-                <NextLink
-                  href="/admin"
-                  className="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 font-bold text-white shadow-sm transition-colors"
-                >
-                  Admin Portal
-                </NextLink>
-              </div>
-            </div>
-
-            <ShowcaseGallery />
-          </div>
-        ) : (
-          <div className="min-h-screen bg-slate-50 py-10 flex flex-col items-center justify-center">
-            {/* Toggle back to showcase */}
-            <div className="mb-6 flex items-center gap-4">
-              <button
-                onClick={() => setDesktopView('showcase')}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md transition-all"
-              >
-                <Monitor className="w-4 h-4" />
-                <span>Switch to 5-Screen UI Showcase</span>
-              </button>
-              <NextLink
-                href="/admin"
-                className="px-4 py-2 rounded-full bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs border border-slate-300 shadow-xs transition-all"
-              >
-                Admin Portal
-              </NextLink>
-            </div>
-
-            {/* Centered Phone Frame */}
-            <div className="phone-frame w-[380px] h-[780px] bg-white text-slate-900 shadow-2xl">
-              <div className="phone-punchhole"></div>
-
-              {/* Status Bar */}
-              <div className="w-full flex items-center justify-between px-7 pt-3 text-[11px] font-mono text-slate-600 z-40 bg-white">
-                <span>10:30</span>
-                <div className="flex items-center gap-1 text-[10px]">
-                  <span>📶</span>
-                  <span>🔋</span>
-                </div>
-              </div>
-
-              {/* Scrollable Screen Body */}
-              <div className="phone-screen p-4 space-y-4 bg-white">
-                {/* Header */}
-                <div className="flex items-center justify-between pt-1">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-2xl font-black text-emerald-600">Nur</span>
-                    <span className="text-xl font-black text-slate-900">App Store</span>
-                  </div>
-                  <NextLink href="/admin" className="p-1 text-slate-500 hover:text-slate-900">
-                    <Settings className="w-5 h-5" />
-                  </NextLink>
-                </div>
-
-                {/* Search */}
-                <form onSubmit={handleSearchSubmit} className="relative">
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search for apps..."
-                    className="w-full pl-3.5 pr-9 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500"
-                  />
-                  <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">
-                    <Search className="w-4 h-4" />
-                  </button>
-                </form>
-
-                {/* Hero Banner */}
-                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#071B2F] via-[#09223D] to-[#0A2D4F] p-4 text-white shadow-md">
-                  <div className="absolute right-0 top-0 bottom-0 w-28 opacity-30 pointer-events-none">
-                    <Image src="/logo.png" alt="Mosque" fill sizes="112px" className="object-contain object-right" />
-                  </div>
-                  <div className="relative z-10 space-y-2 max-w-[180px]">
-                    <h3 className="text-xs font-black leading-snug">
-                      Useful Apps <br />
-                      <span className="font-semibold text-slate-200">For Your Daily Life</span>
-                    </h3>
-                    <NextLink
-                      href="/categories"
-                      className="inline-block px-3.5 py-1.5 rounded-full bg-blue-600 text-[10px] font-bold text-white shadow-sm"
-                    >
-                      Explore Now
-                    </NextLink>
-                  </div>
-                </div>
-
-                {/* Categories */}
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold text-slate-900">Categories</span>
-                    <NextLink href="/categories" className="text-[10px] font-bold text-blue-600 hover:underline">
-                      See All
-                    </NextLink>
-                  </div>
-                  <div className="grid grid-cols-3 gap-2">
-                    {HOME_CATEGORIES.map((cat) => {
-                      const Icon = cat.icon;
-                      return (
-                        <NextLink
-                          key={cat.name}
-                          href="/categories"
-                          className={`p-2.5 rounded-xl ${cat.bgColor} border ${cat.borderColor} flex flex-col items-center text-center`}
-                        >
-                          <div className={`p-1.5 rounded-lg ${cat.iconBg} ${cat.iconColor} mb-1`}>
-                            <Icon className="w-4 h-4" />
-                          </div>
-                          <span className="text-[10px] font-bold text-slate-800">{cat.name}</span>
-                        </NextLink>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Popular Apps */}
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold text-slate-900">Popular Apps</span>
-                    <NextLink href="/categories" className="text-[10px] font-bold text-blue-600 hover:underline">
-                      See All
-                    </NextLink>
-                  </div>
-                  <div className="space-y-2.5">
-                    {popularApps.slice(0, 4).map((app) => (
-                      <AppCard key={app.id} app={app} layout="row" />
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Bottom Nav */}
-              <div className="w-full bg-white border-t border-slate-200 py-2 px-5 flex items-center justify-around text-slate-500 text-[10px] font-medium">
-                <div className="flex flex-col items-center text-blue-600 font-bold">
-                  <span className="w-4 h-4 mb-0.5">🏠</span>
-                  <span>Home</span>
-                </div>
-                <NextLink href="/categories" className="flex flex-col items-center">
-                  <span className="w-4 h-4 mb-0.5">⊞</span>
-                  <span>Categories</span>
-                </NextLink>
-                <NextLink href="/updates" className="flex flex-col items-center relative">
-                  <span className="w-4 h-4 mb-0.5">📥</span>
-                  <span className="absolute -top-1 right-2 w-3.5 h-3.5 bg-red-500 text-white text-[8px] font-black rounded-full flex items-center justify-center">2</span>
-                  <span>Updates</span>
-                </NextLink>
-                <NextLink href="/admin" className="flex flex-col items-center">
-                  <span className="w-4 h-4 mb-0.5">👤</span>
-                  <span>Profile</span>
-                </NextLink>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* ========================================================
-          MOBILE VIEW (ON SMARTPHONES & TABLETS)
-          ======================================================== */}
-      <div className="lg:hidden">
-        <SplashScreen />
-
-        <div className="max-w-md mx-auto px-4 py-4 pb-24">
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
           
-          {/* Top 4 Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mb-5 pt-1">
-            {FEATURE_BADGES.map((b) => {
-              const Icon = b.icon;
-              return (
-                <span
-                  key={b.label}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold border shadow-xs ${b.color}`}
-                >
-                  <Icon className="w-3.5 h-3.5" />
-                  <span>{b.label}</span>
-                </span>
-              );
-            })}
+          {/* Logo & Store Branding */}
+          <NextLink href="/" className="flex items-center gap-3 shrink-0">
+            <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-2xl overflow-hidden border border-emerald-500/30 shadow-xs">
+              <Image src="/logo.png" alt="Nur Logo" fill sizes="44px" className="object-contain" priority />
+            </div>
+            <div>
+              <div className="flex items-baseline gap-1">
+                <span className="text-xl sm:text-2xl font-black text-emerald-600 tracking-tight">Nur</span>
+                <span className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">App Store</span>
+              </div>
+              <p className="hidden md:block text-[10px] text-slate-500 font-medium -mt-0.5">
+                Discover Useful Apps for Your Daily Life
+              </p>
+            </div>
+          </NextLink>
+
+          {/* Search Bar in Desktop Header */}
+          <div className="hidden sm:block flex-1 max-w-lg mx-4">
+            <form onSubmit={handleSearchSubmit} className="relative">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search for verified apps, tools, books..."
+                className="w-full pl-10 pr-4 py-2 rounded-full bg-slate-100 hover:bg-slate-100/80 focus:bg-white border border-slate-200 focus:border-blue-500 text-xs text-slate-900 placeholder-slate-400 focus:outline-none transition-all shadow-inner"
+              />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            </form>
           </div>
 
-          {/* Top Bar: Nur App Store + Settings */}
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-1.5">
-              <span className="text-2xl font-black text-emerald-600">Nur</span>
-              <span className="text-xl font-black text-slate-900">App Store</span>
-            </div>
+          {/* Desktop Nav Links & Admin Portal Link */}
+          <div className="flex items-center gap-2 sm:gap-4">
+            <NextLink
+              href="/categories"
+              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-600 hover:text-slate-900 transition-colors"
+            >
+              <Grid className="w-4 h-4 text-slate-500" />
+              <span>Categories</span>
+            </NextLink>
+
+            <NextLink
+              href="/updates"
+              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-600 hover:text-slate-900 transition-colors relative"
+            >
+              <CloudDownload className="w-4 h-4 text-slate-500" />
+              <span>Updates</span>
+              <span className="w-4 h-4 rounded-full bg-red-500 text-white text-[9px] font-black flex items-center justify-center">
+                2
+              </span>
+            </NextLink>
 
             <NextLink
               href="/admin"
-              className="p-2 rounded-full hover:bg-slate-100 text-slate-600"
-              title="Admin Portal Settings"
+              className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-all"
             >
-              <Settings className="w-5 h-5" />
+              <Settings className="w-3.5 h-3.5 text-amber-400" />
+              <span>Admin Portal</span>
             </NextLink>
           </div>
 
-          {/* Search Bar */}
-          <form onSubmit={handleSearchSubmit} className="relative mb-5">
+        </div>
+      </header>
+
+      {/* ========================================================
+          MAIN APP STORE CONTENT CONTAINER
+          ======================================================== */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 w-full space-y-6">
+
+        {/* Feature Badges Header Bar */}
+        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+          {FEATURE_BADGES.map((b) => {
+            const Icon = b.icon;
+            return (
+              <span
+                key={b.label}
+                className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-[11px] font-bold border shadow-xs ${b.color}`}
+              >
+                <Icon className="w-3.5 h-3.5" />
+                <span>{b.label}</span>
+              </span>
+            );
+          })}
+        </div>
+
+        {/* Mobile Search Bar (Visible on mobile screens) */}
+        <div className="sm:hidden">
+          <form onSubmit={handleSearchSubmit} className="relative">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search for apps..."
-              className="w-full pl-4 pr-11 py-2.5 rounded-2xl bg-slate-100 border border-slate-200 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 shadow-xs"
+              className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-slate-100 border border-slate-200 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 shadow-xs"
             />
-            <button
-              type="submit"
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-500"
-            >
-              <Search className="w-4 h-4" />
-            </button>
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           </form>
+        </div>
 
-          {/* Hero Banner */}
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#071B2F] via-[#09223D] to-[#0A2D4F] p-5 mb-6 shadow-md text-white">
-            <div className="absolute right-0 top-0 bottom-0 w-36 opacity-30 pointer-events-none">
-              <Image src="/logo.png" alt="Mosque" fill sizes="144px" className="object-contain object-right" />
+        {/* ========================================================
+            HERO BANNER (MATCHES SCREEN 2 DESIGN)
+            ======================================================== */}
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#071B2F] via-[#09223D] to-[#0A2D4F] p-6 sm:p-8 text-white shadow-lg">
+          {/* Mosque background graphic from logo */}
+          <div className="absolute right-0 top-0 bottom-0 w-44 sm:w-80 opacity-25 pointer-events-none">
+            <Image src="/logo.png" alt="Mosque" fill sizes="(max-width: 640px) 176px, 320px" className="object-contain object-right" />
+          </div>
+
+          <div className="relative z-10 max-w-sm sm:max-w-md space-y-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[10px] font-bold uppercase tracking-wider">
+              <Sparkles className="w-3 h-3 text-amber-400" />
+              <span>Official Curated Store</span>
             </div>
 
-            <div className="relative z-10 max-w-[200px] space-y-2.5">
-              <h2 className="text-sm font-black leading-snug">
-                Useful Apps <br />
-                <span className="text-slate-200 font-semibold">For Your Daily Life</span>
-              </h2>
+            <h2 className="text-xl sm:text-3xl font-black leading-tight tracking-tight">
+              Useful Apps <br />
+              <span className="font-semibold text-slate-200 text-lg sm:text-2xl">For Your Daily Life</span>
+            </h2>
 
+            <p className="text-xs sm:text-sm text-slate-300 font-medium max-w-xs leading-relaxed">
+              Explore safe, verified Android APKs built for productivity, knowledge, and daily lifestyle.
+            </p>
+
+            <div className="pt-1">
               <NextLink
                 href="/categories"
-                className="inline-block px-4 py-1.5 rounded-full bg-blue-600 hover:bg-blue-700 text-xs font-bold text-white shadow-md shadow-blue-600/30"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-700 active:scale-98 text-xs font-bold text-white shadow-md shadow-blue-600/30 transition-all"
               >
-                Explore Now
+                <span>Explore Now</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </NextLink>
             </div>
           </div>
+        </div>
 
-          {/* Categories */}
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm font-bold text-slate-900">Categories</h2>
-              <NextLink href="/categories" className="text-xs font-bold text-blue-600 hover:underline flex items-center gap-0.5">
-                <span>See All</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </NextLink>
+        {/* ========================================================
+            CATEGORIES SECTION (MATCHES SCREEN 2 & 3)
+            ======================================================== */}
+        <div>
+          <div className="flex items-center justify-between mb-3.5">
+            <div className="flex items-center gap-2">
+              <h2 className="text-base sm:text-lg font-bold text-slate-900">Categories</h2>
+              <span className="text-xs text-slate-400 font-medium hidden sm:inline">
+                • 6 Main Categories
+              </span>
             </div>
-
-            <div className="grid grid-cols-3 gap-2.5">
-              {HOME_CATEGORIES.map((cat) => {
-                const Icon = cat.icon;
-                return (
-                  <NextLink
-                    key={cat.name}
-                    href="/categories"
-                    className={`p-3 rounded-2xl border ${cat.bgColor} ${cat.borderColor} flex flex-col items-center justify-center text-center`}
-                  >
-                    <div className={`p-2 rounded-xl ${cat.iconBg} ${cat.iconColor} mb-1`}>
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <span className="text-[10px] font-bold text-slate-800 truncate w-full">
-                      {cat.name}
-                    </span>
-                  </NextLink>
-                );
-              })}
-            </div>
+            <NextLink
+              href="/categories"
+              className="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-0.5 group"
+            >
+              <span>See All</span>
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </NextLink>
           </div>
 
-          {/* Popular Apps */}
-          <div>
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm font-bold text-slate-900">Popular Apps</h2>
-              <NextLink href="/categories" className="text-xs font-bold text-blue-600 hover:underline flex items-center gap-0.5">
-                <span>See All</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </NextLink>
+          {/* 6 Category Rounded Cards */}
+          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2.5 sm:gap-3.5">
+            {HOME_CATEGORIES.map((cat) => {
+              const Icon = cat.icon;
+              return (
+                <NextLink
+                  key={cat.name}
+                  href="/categories"
+                  className={`p-3 sm:p-4 rounded-2xl border ${cat.bgColor} ${cat.hoverBg} ${cat.borderColor} flex flex-col items-center justify-center text-center transition-all duration-200 hover:shadow-xs group`}
+                >
+                  <div className={`p-2 sm:p-2.5 rounded-xl ${cat.iconBg} ${cat.iconColor} mb-2 shadow-xs group-hover:scale-110 transition-transform`}>
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                  </div>
+                  <span className="text-xs font-bold text-slate-900 truncate w-full">
+                    {cat.name}
+                  </span>
+                  <span className="hidden sm:block text-[10px] font-semibold text-slate-500 mt-0.5">
+                    {cat.count}
+                  </span>
+                </NextLink>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* ========================================================
+            POPULAR APPS SECTION (MATCHES SCREEN 2)
+            ======================================================== */}
+        <div>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <div className="flex items-center gap-2">
+              <h2 className="text-base sm:text-lg font-bold text-slate-900">Popular Apps</h2>
+              <span className="text-xs text-slate-400 font-medium">
+                ({filteredApps.length} Available)
+              </span>
             </div>
 
-            <div className="space-y-2.5">
-              {popularApps.map((app) => (
-                <AppCard key={app.id} app={app} layout="row" />
+            {/* Category Filter Chips */}
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+              {categoriesList.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategoryFilter(cat)}
+                  className={`px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
+                    selectedCategoryFilter === cat
+                      ? 'bg-blue-600 text-white shadow-xs'
+                      : 'bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200'
+                  }`}
+                >
+                  {cat === 'All' ? 'All Apps' : cat.split(' & ')[0]}
+                </button>
               ))}
             </div>
           </div>
 
+          {/* Apps Layout: Single Column List on Mobile, 2-Column Responsive Grid on Desktop */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+            {filteredApps.map((app) => (
+              <AppCard key={app.id} app={app} layout="row" />
+            ))}
+          </div>
+
+          {filteredApps.length === 0 && (
+            <div className="text-center py-12 bg-slate-50 rounded-2xl border border-slate-200">
+              <p className="text-xs font-bold text-slate-600">No apps found in this category</p>
+              <button
+                onClick={() => setSelectedCategoryFilter('All')}
+                className="mt-2 text-xs font-bold text-blue-600 hover:underline"
+              >
+                Reset filter
+              </button>
+            </div>
+          )}
         </div>
-      </div>
-    </>
+
+      </main>
+
+    </div>
   );
 }

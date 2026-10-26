@@ -92,7 +92,7 @@ export default function AdminPortalPage() {
         sessionStorage.setItem('nur_admin_session', 'authenticated');
       } catch (e) {}
     } else {
-      setLoginError('Invalid credentials. Admin username is "admin" and password is "admin".');
+      setLoginError('Invalid administrator credentials. Access restricted.');
     }
   };
 
@@ -206,10 +206,6 @@ export default function AdminPortalPage() {
                     className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500"
                   />
                 </div>
-              </div>
-
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-[11px] text-slate-600 leading-normal">
-                <strong className="text-blue-600">Default Credentials:</strong> Username: <code className="text-slate-900 bg-slate-200 px-1.5 py-0.5 rounded font-mono font-bold">admin</code> | Password: <code className="text-slate-900 bg-slate-200 px-1.5 py-0.5 rounded font-mono font-bold">admin</code>
               </div>
 
               <button
